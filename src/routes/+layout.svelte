@@ -6,24 +6,31 @@
     NavLi,
     NavUl,
     NavHamburger,
+    Span,
   } from "flowbite-svelte";
 
   import { isLoggedIn } from "../stores";
+
+  import DarkMode from "svelte-dark-mode";
+  import { afterUpdate } from "svelte";
+
+  let theme;
+
+  afterUpdate(() => {
+    document.body.className = theme; // "dark" or "light"
+  });
 </script>
 
 <Navbar let:hidden let:toggle>
   <NavBrand href="/">
     <img
-      src="/favicon.png"
-      class="mr-3 h-6 sm:h-9"
+      src="/Favicon.png"
       alt="MedIntelligence Logo Logo"
+      height=120
+      width=180
     />
-    <span
-      class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-    >
-      MedIntelligence
-    </span>
   </NavBrand>
+  <DarkMode bind:theme />
   <NavHamburger on:click={toggle} />
   <NavUl {hidden}>
     <NavLi href="/" active={true}>Home</NavLi>
@@ -38,3 +45,10 @@
   </NavUl>
 </Navbar>
 <slot />
+
+<style>
+  :global(.dark) {
+    background: #032f62;
+    color: #f1f8ff;
+  }
+</style>
