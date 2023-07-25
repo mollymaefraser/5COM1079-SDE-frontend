@@ -1,11 +1,31 @@
 <script>
     import {  Heading, P, Button } from 'flowbite-svelte'
 
-    import LottieHeartJSON from './animation_lkhb7bjh.json'
+    import { onMount } from 'svelte';
+    let LottiePlayer;
+
+    onMount(async () => {
+      const module = await import("@lottiefiles/svelte-lottie-player");
+      LottiePlayer = module.LottiePlayer;
+    });
   </script>
 
-  <div class="heart-animation">
-    <lottie-player src={LottieHeartJSON} background=“Transparent” speed=“1” style="width: 300px; height: 300px" direction=“1” mode=“normal” loop controls autoplay></lottie-player>
+
+  <div class="health-animation">
+    {#if LottiePlayer}
+						<LottiePlayer
+							src="https://lottie.host/e6cb123b-ffc2-401b-a843-4a8faa5b942d/7nJrJRsdG7.json"
+							autoplay={true}
+							loop={true}
+							controls={false}
+							renderer="svg"
+							background="transparent"
+							height={250}
+							width={250}
+						/>
+					{:else}
+						<img class="object-center pt-6  w-full pl-6 pr-12 lg:mt-6 md:pl-0 md:pr-4 " src="blockbuilding.svg" alt="building graphic" />
+					{/if}
   </div>
   
   <div  class="text-center">
@@ -20,5 +40,8 @@
   <style>
     .text-center{
         padding-top: 50px;
+    }
+    .health-animation{
+      padding-left: 600px;
     }
   </style>

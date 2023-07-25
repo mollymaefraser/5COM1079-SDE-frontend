@@ -15,6 +15,7 @@
     "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
+    "@lottiefiles/svelte-lottie-player": "^0.3.0",
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
@@ -34,11 +35,13 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "^1.4.5",
+    "@lottiefiles/lottie-interactivity": "^1.6.2",
     "@lottiefiles/lottie-player": "^2.0.2",
     "flowbite": "^1.7.0",
     "flowbite-svelte": "^0.40.2",
     "lottie-player": "^1.0.0",
     "n": "^9.1.0",
-    "tailwind-merge": "^1.14.0"
+    "tailwind-merge": "^1.14.0",
+    "yarn": "^1.22.19"
   }
 }
