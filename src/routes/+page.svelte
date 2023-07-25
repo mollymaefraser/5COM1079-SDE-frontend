@@ -40,9 +40,10 @@
   <style>
     .text-center{
         padding-top: 500px;
+        padding-bottom: 100px;
     }
     .health-animation{
-      position: fixed;
+      position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
