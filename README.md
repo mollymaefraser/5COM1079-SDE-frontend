@@ -1,9 +1,9 @@
 # SDE Frontend (Group 1)
-```
 
 ## Developing
 
 Once you've cloned and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+> (NOTE: If like Tom, your installation of dependencies failed for a "Platform not supported error", try 'npm i -f' to force install.)
 
 ```bash
 npm run dev
@@ -14,7 +14,7 @@ npm run dev -- --open
 
 ## Building
 
-To create a production version of ythe app:
+To create a production version of the app:
 
 ```bash
 npm run build

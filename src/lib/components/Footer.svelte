@@ -9,7 +9,7 @@ import { Footer, FooterCopyright, FooterLinkGroup, FooterBrand, FooterLink } fro
     <div class="sm:flex sm:items-center sm:justify-between">
       <FooterBrand
         href=""
-        src="/Favicon.png"
+        src="/favicon.png"
         alt="MedIntelligence Logo"
         name="MedIntelligence"
       />
