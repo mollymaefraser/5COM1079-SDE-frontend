@@ -4,11 +4,15 @@
     import { onMount } from 'svelte';
     let LottiePlayer;
 
+    // onMount is loaded when the page is (hence on mount) and what it does is it loads in Lottie Player which is used for the animation
+
     onMount(async () => {
       const module = await import("@lottiefiles/svelte-lottie-player");
       LottiePlayer = module.LottiePlayer;
     });
   </script>
+
+  {@html '<!--Script (above) is used for declaring functions, variables, and imports-->'}
 
 
   <div class="health-animation">
@@ -24,9 +28,11 @@
 							width={250}
 						/>
 					{:else}
-						<img class="object-center pt-6  w-full pl-6 pr-12 lg:mt-6 md:pl-0 md:pr-4 " src="blockbuilding.svg" alt="building graphic" />
+						<img class="object-center pt-6  w-full pl-6 pr-12 lg:mt-6 md:pl-0 md:pr-4 " src="/problem.png" alt="problem graphic" />
 					{/if}
   </div>
+  {@html '<!--I created a div for the health animation. Within that, if Lottie Player has been loaded correctly it will then display the animation. if not, it will show a problem graphic-->'}
+
   
   <div  class="text-center">
     <Heading tag="h1" class="mb-4" customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl">Help with your health, when you need it most.</Heading>
@@ -35,6 +41,8 @@
     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
     </Button>
   </div>
+
+  {@html '<!--The above div shows the text about medintelligence. Clicking on the learn more button will take you to an about page-->'}
 
 
   <style>
@@ -49,3 +57,8 @@
       transform: translate(-50%, -50%);
     }
   </style>
+  {@html '<!--Here is where I have styled the above 2 divs-->'}
+
+
+  {@html '<!--Overall, this file serves as the landing page-->'}
+
