@@ -13,7 +13,7 @@
 <Navbar let:hidden let:toggle>
     <NavBrand href="/">
       <img
-        src="/Favicon.png"
+        src="/favicon.png"
         alt="MedIntelligence Logo"
         height=120
         width=180
