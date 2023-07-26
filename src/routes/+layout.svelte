@@ -58,7 +58,7 @@
   <div class="sm:flex sm:items-center sm:justify-between">
     <FooterBrand
       href=""
-      src="/Favicon.png"
+      src="/Logo-{theme}.png"
       alt="MedIntelligence Logo"
       name="MedIntelligence"
     />
