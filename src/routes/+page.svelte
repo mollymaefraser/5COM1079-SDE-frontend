@@ -39,8 +39,8 @@
 
   <style>
     .text-center{
-        padding-top: 500px;
-        padding-bottom: 100px;
+        padding-top: 400px;
+        padding-bottom: 70px;
     }
     .health-animation{
       position: absolute;
