@@ -10,15 +10,14 @@
                 <div class="login__input-error-message"></div>
             </div>
             <div class="login__input-message">
-                <input type="password" class="login__input" placeholder="Password"> <!--input description and placeholder for password -->
+                <input type="password" class="login__input" style="color: black" placeholder="Password"> <!--input description and placeholder for password -->
                 <div class="login__input-error-message"></div>
             </div>
             <button class="login__button" type="submit">Login</button> <!--login button with type submit-->
-            <p class="login__text">
+            <br>
+            <br>
+            <p class="login__text" style="color: black">
                 <a href="/reset-password" class="login__password-link">Forgot your password</a> <!--forgot passord link to reset password-->
-            </p>
-            <p class="login__text">
-                <a href="/sign-up" class="login__password-link">Signup</a> <!--forgot passord link to reset password-->
             </p>
         </form>
     </div>
@@ -40,8 +39,7 @@
 
     }
     .container{
-        
-        width: 400px;
+        min-height: 350px;
         max-width: 400px; /* both width and max width should scale the page across different device type(responsive) */
         margin: 1rem; /* one unit of the base font size */
         padding: 2rem;
@@ -58,6 +56,7 @@
     .login__title{
         margin-bottom: 2rem;
         text-align: center;
+        color: black;
     }
 
     
@@ -66,6 +65,7 @@
     }
 
     .login__input-message{
+        color: black;
         margin-bottom: 1rem; /* would create some space between the input fields */
     }
 
@@ -78,12 +78,14 @@
         outline: none;
         border: 1px solid lightgrey;
         background: grey;
+        color: black;
         transition: background 0.2s, border-color 0.2s;/*transition on the inputfield background colour */
     }
 
     .login__input:focus{ /*changes the background colur of the input field in focus to white*/
         border-color: green;
         background: white;
+        color: black;
     }
 
     .login__button{
