@@ -6,11 +6,11 @@
             <h1 class="login__title">Login</h1>
             <div class="login__message login__error--message"></div> <!--error message fopr wrong login details-->
             <div class="login__input-message">
-                <input type="text" class="login__input" placeholder="Username or email"> <!--input description for username -->
+                <input type="text" class="login__input" style="background-color: white" placeholder="Username or email"> <!--input description for username -->
                 <div class="login__input-error-message"></div>
             </div>
             <div class="login__input-message">
-                <input type="password" class="login__input" style="color: black" placeholder="Password"> <!--input description and placeholder for password -->
+                <input type="password" class="login__input" style="background-color: white" placeholder="Password"> <!--input description and placeholder for password -->
                 <div class="login__input-error-message"></div>
             </div>
             <button class="login__button" type="submit">Login</button> <!--login button with type submit-->
