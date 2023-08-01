@@ -17,7 +17,7 @@
             <br>
             <br>
             <p class="login__text" style="color: black">
-                <a href="/reset-password" class="login__password-link">Forgot your password</a> <!--forgot passord link to reset password-->
+                <a href="/reset-password" class="login__password-link">Forgot your password?</a> <!--forgot passord link to reset password-->
             </p>
         </form>
     </div>
@@ -86,6 +86,7 @@
         border-color: green;
         background: white;
         color: black;
+
     }
 
     .login__button{
