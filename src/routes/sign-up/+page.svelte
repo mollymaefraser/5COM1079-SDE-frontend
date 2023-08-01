@@ -8,19 +8,19 @@
             <h1 class="signup__title">Sign up</h1>
             
             <div class="signup_message">
-                <input type="text" class="signup__input" style="background-color: white" placeholder="Email"> <!--input description for email -->
+                <input type="text" class="signup__input" style="background-color: white" placeholder="Email" required> <!--input description for email -->
             </div>
 
             <div class="signup_message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Username"> <!--input description for username -->
+                <input type="text" class="login__input" style="background-color: white" placeholder="Username" required> <!--input description for username -->
             </div>
 
             <div class="signup_message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Password"> <!--input description for password -->
+                <input type="text" class="login__input" style="background-color: white" placeholder="Password" required> <!--input description for password -->
             </div>
 
             <div class="signup_message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Confirm Password"> <!--input description to confirm password -->
+                <input type="text" class="login__input" style="background-color: white" placeholder="Confirm Password" required> <!--input description to confirm password -->
             </div>
 
             <button class="signup__button" type="submit">Sign up</button> <!--signup button with type submit-->
