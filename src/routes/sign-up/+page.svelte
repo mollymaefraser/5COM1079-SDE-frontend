@@ -1,4 +1,4 @@
-{@html '<!--I have created an input for the signup form with placeholders for both name, email, password and confirm password-->'}
+{@html '<!--I have created an input for the signup form with placeholders for both username, emai, password and confirm password-->'}
 
 <body>
 
@@ -6,17 +6,13 @@
 
         <form class="form">
             <h1 class="signup__title">Sign up</h1>
-
-            <div class="signup_message">
-                <input type="text" class="signup__input" style="background-color: white" placeholder="First Name" required> <!--input description for first name -->
-            </div>
-
-            <div class="signup_message">
-                <input type="text" class="signup__input" style="background-color: white" placeholder="Last Name" required> <!--input description for last name -->
-            </div>
             
             <div class="signup_message">
                 <input type="text" class="signup__input" style="background-color: white" placeholder="Email" required> <!--input description for email -->
+            </div>
+
+            <div class="signup_message">
+                <input type="text" class="login__input" style="background-color: white" placeholder="Username" required> <!--input description for username -->
             </div>
 
             <div class="signup_message">
