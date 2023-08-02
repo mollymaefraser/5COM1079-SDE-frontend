@@ -6,32 +6,22 @@
             <h1 class="login__title">Login</h1>
             <div class="login__message login__error--message"></div> <!--error message fopr wrong login details-->
             <div class="login__input-message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Username or email"> <!--input description for username -->
+                <input type="text" class="login__input" style="background-color: white" placeholder="Email"> <!--input description for username -->
                 <div class="login__input-error-message"></div>
             </div>
             <div class="login__input-message">
                 <input type="password" class="login__input" style="background-color: white" placeholder="Password"> <!--input description and placeholder for password -->
                 <div class="login__input-error-message"></div>
-            </div>
-            <div class="form_rememberme">
-
-                <input type="checkbox" class="rememberme" id="remember_me">
-                <label for="remember_me">Remember me</label> <!--Remember label and checkbox-->
-
-            </div>
-            
+            </div>            
             <button class="login__button" type="submit">Login</button> <!--login button with type submit-->
             <br>
-            <br>
-            <p class="login__text" style="color: black">
-                <a href="/reset-password" class="login__password-link">Forgot your password?</a> <!--forgot passord link to reset password-->
-            </p>
+            <br>>
         </form>
     </div>
 </body>
 
 
-{@html '<!--setting propertiews for the body, container, -->'}
+{@html '<!--setting properties for the body, container, -->'}
 
 <style>
     body{ /*should vertically and horizontally center the container for the form*/
@@ -94,26 +84,6 @@
         background: white;
         color: black;
 
-    }
-
-    .form_rememberme{
-        margin-bottom: 1rem;
-    }
-
-
-    input[type="checkbox"]{
-        -webkit-appearance: checkbox;
-        -moz-appearance: checkbox;
-        appearance: checkbox;
-        display: inline-block;
-        width: auto;
-        
-    }
-
-    label{
-        color: #666;
-        font-size: .875rem;
-        
     }
 
     .login__button{
