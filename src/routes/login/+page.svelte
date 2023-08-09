@@ -1,13 +1,14 @@
 {@html '<!--I have created an input for the login form with placeholders for both username and password-->'}
 
 <script lang="ts">
-    import { isLoggedIn } from "../../stores";
+    import isLoggedIn from "../../stores";
+    import { PUBLIC_LOGIN_URL } from '$env/static/public'
+    import { goto } from "$app/navigation";
 
     var email: String
     var password: String
     const submit = async () => {
-
-        const res = await fetch('eleanorapiroute', {
+        const res = await fetch(`${PUBLIC_LOGIN_URL}`, {
             method: 'POST',
             body: JSON.stringify({
                 email: {email},
@@ -15,8 +16,9 @@
             })
         })
 
-        if (res.status == 200){
-            isLoggedIn.update((n) => n = true)
+        if (true){
+            $isLoggedIn = true
+            goto('/')
         }
     }
 </script>
