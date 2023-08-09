@@ -9,7 +9,7 @@
     let data: PageData
 
     onMount(async () => {
-        data.symptomList.forEach( (element) => {
+        data.symptoms.forEach( (element) => {
             symptomsToChoose.push({value: element, name: element})
         });
     });

@@ -1,6 +1,9 @@
 export async function load({ fetch }) {
-    const res = await fetch(`/toms/api/route`);
-    const item = await res.json();
+    const res = await fetch(`/toms/api/route`, {
+        method: 'GET'
+    });
 
-    return { item };
+    const symptoms: [] = await res.json();
+
+    return { symptoms };
 }

@@ -1,21 +1,42 @@
 {@html '<!--I have created an input for the login form with placeholders for both username and password-->'}
 
+<script lang="ts">
+    import { isLoggedIn } from "../../stores";
+
+    var email: String
+    var password: String
+    const submit = async () => {
+
+        const res = await fetch('eleanorapiroute', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: {email},
+                password: {password}
+            })
+        })
+
+        if (res.status == 200){
+            isLoggedIn.update((n) => n = true)
+        }
+    }
+</script>
+
 <body>
     <div class= "container">
         <form class="form" id="login">
             <h1 class="login__title">Login</h1>
-            <div class="login__message login__error--message"></div> <!--error message fopr wrong login details-->
+            <div class="login__message login__error--message"></div> <!--error message for wrong login details-->
             <div class="login__input-message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Email"> <!--input description for username -->
+                <input type="text" bind:value={email} id="email-input" class="login__input" style="background-color: white" placeholder="Email"> <!--input description for username -->
                 <div class="login__input-error-message"></div>
             </div>
             <div class="login__input-message">
-                <input type="password" class="login__input" style="background-color: white" placeholder="Password"> <!--input description and placeholder for password -->
+                <input type="password" bind:value={password} id="password-input" class="login__input" style="background-color: white" placeholder="Password"> <!--input description and placeholder for password -->
                 <div class="login__input-error-message"></div>
             </div>            
-            <button class="login__button" type="submit">Login</button> <!--login button with type submit-->
+            <button class="login__button" type="submit" on:click|preventDefault={() => {submit()}}>Login</button> <!--login button with type submit-->
             <br>
-            <br>>
+            <br>
         </form>
     </div>
 </body>
