@@ -46,7 +46,7 @@
     "mockjs": "^1.1.0",
     "n": "^9.1.0",
     "tailwind-merge": "^1.14.0",
-    "vite-plugin-mock": "^3.0.0",
+    "vite-plugin-mock": "^2.9.8",
     "vite-plugin-mock-server": "^1.1.0",
     "yarn": "^1.22.19"
   }

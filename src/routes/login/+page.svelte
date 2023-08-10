@@ -16,7 +16,7 @@
             })
         })
 
-        if (true){
+        if (res.status == 200){
             $isLoggedIn = true
             goto('/')
         }
