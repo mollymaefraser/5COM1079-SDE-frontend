@@ -1,18 +1,42 @@
 <script lang="ts">
-    import { MultiSelect, Button, Heading, P, A, Mark, Secondary, Span } from 'flowbite-svelte'
+    import { MultiSelect, Button, Heading, P, Span } from 'flowbite-svelte'
     import type { PageData } from './$types';
     import { onMount } from 'svelte';
-    let symptomsChosen = []
-    let symptomsToChoose = []
-    $:diagnosis = "Unknown"
+
+    type DiagnosisReturn  = {
+        condition: string[],
+        description: string[]
+        advice: string[],
+    }
+
+    let symptomsChosen: string[] = []
+    let symptomsToChoose: any
+    let diagnosisReturn: DiagnosisReturn[] = []
+
+
+    $:diagnosis = ""
+    $:description = ""
+    $:advice = ""
+    $:diagnosisReturn.forEach((element) => {
+        let tempStrCondition = ` or ${element.condition}`
+        let tempStrAdvice =  ` or ${element.advice}`
+        let tempStrDescription = ` or ${element.description}`
+        diagnosis = diagnosis.concat(diagnosis, tempStrCondition)
+        description = description.concat(description, tempStrDescription)
+        advice = advice.concat(advice, tempStrAdvice)
+    })
 
     let data: PageData
 
     onMount(async () => {
-        data.symptoms.forEach( (element) => {
-            symptomsToChoose.push({value: element, name: element})
+        data.symptoms.forEach( (element: string) => {
+            symptomsToChoose.push({value: {element}, name: {element}})
         });
     });
+
+    const submitSymptoms = async() => {
+
+    }
 </script>
 
 <div  class="text-center">
@@ -20,8 +44,10 @@
     <P class="mb-6 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Simply select the symptoms below that you are suffering from in order to recieve a predictive diagnosis.</P>
 </div>
 
-<div class="diagnosis">
-    <Heading tag="h2">Your condition: {diagnosis}</Heading>
+<div class="condition-result">
+    <Heading tag="h2">Your condition(s): {diagnosis}</Heading>
+    <p>Condition description(s): {description}</p>
+    <p>Condition advice: {advice}</p>
 </div>
 
 <div class="symptoms">
@@ -29,7 +55,7 @@
 </div>
 
 <div class="submitter">
-    <Button>Submit</Button>
+    <Button on:click={submitSymptoms}>Submit</Button>
 </div>
 
 
@@ -40,7 +66,7 @@
         padding: 70px;
     }
 
-    .diagnosis{
+    .condition-result{
         padding: 70px;
     }
     .submitter{

@@ -1,11 +1,9 @@
-import { MockHandler } from 'vite-plugin-mock-server'
+import { MockMethod } from 'vite-plugin-mock'
 
-export default (): MockHandler[] => [
+export default [
   {
-    pattern: 'mock/api/login',
-    method: 'get',
-    handle: (req) => {
-      req.statusCode = 200
-    }
+    url: '/mock/api/login',
+    method: 'post',
+    statusCode: 200
   }
-]
+] as MockMethod []

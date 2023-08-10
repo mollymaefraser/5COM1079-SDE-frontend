@@ -1,5 +1,5 @@
 export async function load({ fetch }) {
-    const res = await fetch(`/toms/api/route`, {
+    const res = await fetch(`/mock/api/symptom-loader`, {
         method: 'GET'
     });
 
