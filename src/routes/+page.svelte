@@ -29,8 +29,6 @@
 							height={250}
 							width={250}
 						/>
-					{:else}
-						<img class="object-center pt-6  w-full pl-6 pr-12 lg:mt-6 md:pl-0 md:pr-4 " src="/problem.png" alt="problem graphic" />
 					{/if}
   </div>
   {@html '<!--I created a div for the health animation. Within that, if Lottie Player has been loaded correctly it will then display the animation. if not, it will show a problem graphic-->'}
