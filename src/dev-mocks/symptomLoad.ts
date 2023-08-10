@@ -1,8 +1,8 @@
-import { MockMethod } from 'vite-plugin-mock'
+import type { MockMethod } from 'vite-plugin-mock'
 
 export default [
   {
-    url: '/mock/api/symptom-loader',
+    url: '/mock/symptom-loader',
     method: 'get',
     response: () => ([
       "symptom1",

@@ -1,8 +1,8 @@
-import { MockMethod } from 'vite-plugin-mock'
+import type { MockMethod } from 'vite-plugin-mock'
 
 export default [
   {
-    url: '/mock/api/login',
+    url: '/mock/login',
     method: 'post',
     statusCode: 200
   }

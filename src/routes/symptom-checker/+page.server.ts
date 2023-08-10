@@ -1,5 +1,7 @@
+import { PUBLIC_SYMPTOM_LOAD_URL } from '$env/static/public';
+
 export async function load({ fetch }) {
-    const res = await fetch(`/mock/api/symptom-loader`, {
+    const res = await fetch(`${PUBLIC_SYMPTOM_LOAD_URL}`, {
         method: 'GET'
     });
 
