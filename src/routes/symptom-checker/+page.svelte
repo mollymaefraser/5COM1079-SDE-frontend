@@ -2,12 +2,8 @@
     import { MultiSelect, Button, Heading, P, Span } from 'flowbite-svelte'
     import type { PageData } from './$types';
     import { onMount } from 'svelte';
-
-    type DiagnosisReturn  = {
-        condition: string[],
-        description: string[]
-        advice: string[],
-    }
+    import { PUBLIC_SYMPTOM_SEND_URL } from '$env/static/public';
+    import type { DiagnosisReturn } from '$lib/types/diagnosisReturn';
 
     let symptomsChosen: string[] = []
     let symptomsToChoose: any
@@ -35,7 +31,11 @@
     });
 
     const submitSymptoms = async() => {
+        const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
+        method: 'POST'
+        });
 
+        diagnosisReturn = await res.json();
     }
 </script>
 
