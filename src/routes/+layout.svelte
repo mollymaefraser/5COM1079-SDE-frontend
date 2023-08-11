@@ -7,7 +7,8 @@
   import { afterUpdate } from "svelte";
 
   import Footer from "$lib/components/Footer.svelte";
-    import Navbar from "$lib/components/Navbar.svelte";
+  import Navbar from "$lib/components/Navbar.svelte";
+
 
   let theme;
 

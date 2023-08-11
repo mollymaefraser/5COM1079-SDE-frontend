@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {
     Navbar,
     NavBrand,
@@ -7,7 +7,12 @@
     NavHamburger,
   } from "flowbite-svelte";
 
-  import { isLoggedIn } from "../../stores.js";
+  import isLoggedIn from "../../stores.js";
+  
+
+  function logout(){
+    $isLoggedIn = false
+  }
 </script>
 
 <Navbar let:hidden let:toggle>
@@ -24,8 +29,8 @@
     {@html '<!--The above serves as having a dropdown bar you are able to clock on to show the rest of the navbar/options-->'}
     <NavUl {hidden}>
       <NavLi href="/" active={true}>Home</NavLi>
-      {#if isLoggedIn}
-          <NavLi href="/logout">Log Out</NavLi>
+      {#if $isLoggedIn == true}
+          <NavLi on:click={logout} href="/">Log Out</NavLi>
           <NavLi href="/symptom-checker">Symptom Checker</NavLi>
           <NavLi href="/find-provider">Find Health Provider</NavLi>
           {@html '<!--The above are the options for a user who is logged in-->'}

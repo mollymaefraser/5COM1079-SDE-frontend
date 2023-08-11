@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
     import {  Heading, P, Button } from 'flowbite-svelte'
 
     import { onMount } from 'svelte';
-    let LottiePlayer;
+    let LottiePlayer: any;
+
+    import lottieHealth from '$lib/lottie/lottieHealth.json'
 
     // onMount is loaded when the page is (hence on mount) and what it does is it loads in Lottie Player which is used for the animation
 
@@ -18,7 +20,7 @@
   <div class="health-animation">
     {#if LottiePlayer}
 						<LottiePlayer
-							src="https://lottie.host/e6cb123b-ffc2-401b-a843-4a8faa5b942d/7nJrJRsdG7.json"
+							src={lottieHealth}
 							autoplay={true}
 							loop={true}
 							controls={false}
@@ -27,8 +29,6 @@
 							height={250}
 							width={250}
 						/>
-					{:else}
-						<img class="object-center pt-6  w-full pl-6 pr-12 lg:mt-6 md:pl-0 md:pr-4 " src="/problem.png" alt="problem graphic" />
 					{/if}
   </div>
   {@html '<!--I created a div for the health animation. Within that, if Lottie Player has been loaded correctly it will then display the animation. if not, it will show a problem graphic-->'}
