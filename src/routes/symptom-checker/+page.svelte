@@ -26,7 +26,7 @@
 
     onMount(async () => {
         data.symptoms.forEach( (element: string) => {
-            symptomsToChoose.push({value: {element}, name: {element}})
+            symptomsToChoose.push({val: {element}, name: {element}})
         });
     });
 

@@ -1,7 +1,7 @@
 {@html '<!--I have created an input for the login form with placeholders for both username and password-->'}
 
 <script lang="ts">
-    import isLoggedIn from "../../stores";
+    import isLoggedIn from "$lib/types/stores.js";
     import { PUBLIC_LOGIN_URL } from '$env/static/public'
     import { goto } from "$app/navigation";
 

@@ -7,7 +7,7 @@
     NavHamburger,
   } from "flowbite-svelte";
 
-  import isLoggedIn from "../../stores.js";
+  import isLoggedIn from "$lib/types/stores.js";
   
 
   function logout(){

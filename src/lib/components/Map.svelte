@@ -1,30 +1,50 @@
 <script lang="ts">
-    import { onMount, onDestroy } from 'svelte'
-    import { Map } from 'maplibre-gl';
+    import { onMount } from 'svelte'
+    import { Map, Marker, NavigationControl } from 'maplibre-gl';
     import 'maplibre-gl/dist/maplibre-gl.css';
+    import type { MarkerPoint } from '$lib/types/MarkerPoint';
   
     let map: Map;
     let mapContainer: string | HTMLElement;
+
+    export let markers: MarkerPoint[] = [];
   
     const apiKey = 'U6Q44BrLCIKE3mhBEMv9';
+
+    $: longitude = -0.23905;
+    $: latitude = 51.751744;
+    $: zoom = 14;
   
     onMount(() => {
-      const initialState = { lng: 139.753, lat: 35.6844, zoom: 14 };
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            longitude = position.coords.longitude
+            latitude = position.coords.latitude
+        });
+        console.log(longitude)
+      }
   
       map = new Map({
         container: mapContainer,
-        style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
-        center: [initialState.lng, initialState.lat],
-        zoom: initialState.zoom
+        style: `https://api.maptiler.com/maps/basic-v2/style.json?key=${apiKey}`,
+        center: [longitude, latitude],
+        zoom: zoom
       });
-  
-    });
+
+      map.addControl(new NavigationControl(), 'top-right');
+
+      // for(let i=0; i<markers.length; i++){
+      //   new Marker({color: "#FF0000"})
+      //   .setLngLat([markers[i].longitude, markers[i].latitude])
+      //   .addTo(map);
+      // }
+  });
 
   </script>
-  
+
   <div class="map-wrap">
     <a href="https://www.maptiler.com" class="watermark"><img
-      src="https://api.maptiler.com/maps/basic-v2/?key=U6Q44BrLCIKE3mhBEMv9#1.0/42.60066/8.38228" alt="MapTiler logo"/></a>
+      src= 'https://api.maptiler.com/resources/logo.svg' alt="MapTiler logo"/></a>
     <div class="map" bind:this={mapContainer}></div>
   </div>
   
