@@ -15,7 +15,7 @@
             </div>            
             <button class="login__button" type="submit">Login</button> <!--login button with type submit-->
             <br>
-            <br>>
+            <br>
         </form>
     </div>
 </body>
