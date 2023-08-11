@@ -1,11 +1,10 @@
 <script lang="ts">
     import { MultiSelect, Button, Heading, P, Span } from 'flowbite-svelte'
-    import type { PageData } from './$types';
     import { onMount } from 'svelte';
     import { PUBLIC_SYMPTOM_SEND_URL } from '$env/static/public';
     import type { DiagnosisReturn } from '$lib/types/diagnosisReturn';
     import type { SelectOptionType } from 'flowbite-svelte/dist/types';
-    import { stringify } from 'postcss';
+    import type { LayoutData } from '../$types';
 
     let symptomsChosen: string[] = []
     let symptomsToChoose: SelectOptionType[] = []
@@ -15,20 +14,31 @@
     $:diagnosis = ""
     $:description = ""
     $:advice = ""
-    $:diagnosisReturn.forEach((element) => {
-        let tempStrCondition = ` or ${element.condition}`
-        let tempStrAdvice =  ` or ${element.advice}`
-        let tempStrDescription = ` or ${element.description}`
-        diagnosis = diagnosis.concat(diagnosis, tempStrCondition)
-        description = description.concat(description, tempStrDescription)
-        advice = advice.concat(advice, tempStrAdvice)
-    })
 
-    let data: PageData // somehow undefined
+    $: for(let i=0; i<diagnosisReturn.length; i++) {
+        let tempStrCondition = ""
+        let tempStrAdvice = ""
+        let tempStrDescription = ""
+        if(i == 0){
+            tempStrCondition = `${diagnosisReturn[i].condition}`
+            tempStrAdvice =  `${diagnosisReturn[i].advice}`
+            tempStrDescription = ` ${diagnosisReturn[i].description}`
+        }else{
+            tempStrCondition = ` or ${diagnosisReturn[i].condition}`
+            tempStrAdvice =  ` or ${diagnosisReturn[i].advice}`
+            tempStrDescription = ` or ${diagnosisReturn[i].description}`
+        }
+
+        diagnosis += tempStrCondition
+        description += tempStrDescription
+        advice +=tempStrAdvice
+    }
+
+    export let data: LayoutData 
 
     onMount(async () => {
-        data.symptoms?.forEach( (element: string) => {
-            symptomsToChoose.push({value: String({element}), name: String({element})})
+        data.symptoms.forEach( (val: string) => {
+            symptomsToChoose.push({value: `${val}1`, name: `${val}`})
         });
     });
 

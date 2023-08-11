@@ -11,6 +11,7 @@
   
     const apiKey = 'U6Q44BrLCIKE3mhBEMv9';
 
+
     $: longitude = -0.23905;
     $: latitude = 51.751744;
     $: zoom = 14;
@@ -21,7 +22,6 @@
             longitude = position.coords.longitude
             latitude = position.coords.latitude
         });
-        console.log(longitude)
       }
   
       map = new Map({
@@ -33,11 +33,11 @@
 
       map.addControl(new NavigationControl(), 'top-right');
 
-      for(let i=0; i<markers.length; i++){
+      markers.forEach((element: MarkerPoint) => {
         new Marker({color: "#FF0000"})
-        .setLngLat([markers[i].longitude, markers[i].latitude])
+        .setLngLat([element.longitude, element.latitude])
         .addTo(map);
-      }
+        });
   });
 
   </script>

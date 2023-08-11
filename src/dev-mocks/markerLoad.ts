@@ -9,11 +9,11 @@ export default [
     response: () => [
         {
             longitude: -0.23905,
-            latitude: 51.751744
+            latitude: 48.751744,
         },
         {
-            longitude: -0.53905,
-            latitude: 52.751744
+            longitude: 5.53905,
+            latitude: 55.751744,
         }
     ] as MarkerPoint[]
   }
