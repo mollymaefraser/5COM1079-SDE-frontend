@@ -5,6 +5,7 @@ export default [
   {
     url: '/mock/marker-loader',
     method: 'get',
+    timeout: 2000,
     response: () => [
         {
             longitude: -0.23905,

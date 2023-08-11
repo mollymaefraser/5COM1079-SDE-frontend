@@ -33,11 +33,11 @@
 
       map.addControl(new NavigationControl(), 'top-right');
 
-      // for(let i=0; i<markers.length; i++){
-      //   new Marker({color: "#FF0000"})
-      //   .setLngLat([markers[i].longitude, markers[i].latitude])
-      //   .addTo(map);
-      // }
+      for(let i=0; i<markers.length; i++){
+        new Marker({color: "#FF0000"})
+        .setLngLat([markers[i].longitude, markers[i].latitude])
+        .addTo(map);
+      }
   });
 
   </script>

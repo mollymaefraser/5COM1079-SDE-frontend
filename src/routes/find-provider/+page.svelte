@@ -8,5 +8,5 @@
 
 
 <div class="map">
-    <Map></Map>
+    <Map markers={data?.markers}></Map>
 </div>

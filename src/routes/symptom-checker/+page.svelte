@@ -4,9 +4,11 @@
     import { onMount } from 'svelte';
     import { PUBLIC_SYMPTOM_SEND_URL } from '$env/static/public';
     import type { DiagnosisReturn } from '$lib/types/diagnosisReturn';
+    import type { SelectOptionType } from 'flowbite-svelte/dist/types';
+    import { stringify } from 'postcss';
 
     let symptomsChosen: string[] = []
-    let symptomsToChoose: any
+    let symptomsToChoose: SelectOptionType[] = []
     let diagnosisReturn: DiagnosisReturn[] = []
 
 
@@ -22,11 +24,11 @@
         advice = advice.concat(advice, tempStrAdvice)
     })
 
-    let data: PageData
+    let data: PageData // somehow undefined
 
     onMount(async () => {
-        data.symptoms.forEach( (element: string) => {
-            symptomsToChoose.push({val: {element}, name: {element}})
+        data.symptoms?.forEach( (element: string) => {
+            symptomsToChoose.push({value: String({element}), name: String({element})})
         });
     });
 
