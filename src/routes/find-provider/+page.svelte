@@ -3,7 +3,7 @@
     import Map from "$lib/components/Map.svelte";
     import type { PageData } from './$types';
 
-    let data: PageData;
+    let data: PageData; // undefined somehow
 </script>
 
 
