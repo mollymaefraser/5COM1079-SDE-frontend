@@ -13,7 +13,7 @@
 
   $: longitude = -0.23905;
   $: latitude = 51.751744;
-  $: zoom = 14;
+  let zoom = 7;
 
   onMount(() => {
     if (navigator.geolocation) {
@@ -31,6 +31,10 @@
     });
 
     map.addControl(new NavigationControl(), "top-right");
+
+    new Marker({ color: "#00FF00" })
+        .setLngLat([longitude, latitude])
+        .addTo(map);
 
     markers.forEach((element: MarkerPoint) => {
       console.log(element.longitude);
