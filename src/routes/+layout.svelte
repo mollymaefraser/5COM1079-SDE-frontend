@@ -9,6 +9,7 @@
 
 
   let theme;
+  
 
   afterUpdate(() => {
     document.body.className = theme; // "dark" or "light"

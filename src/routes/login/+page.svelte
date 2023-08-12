@@ -4,6 +4,9 @@
     import isLoggedIn from "$lib/types/stores.js";
     import { PUBLIC_LOGIN_URL } from '$env/static/public'
     import { goto } from "$app/navigation";
+    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
+
+    var hasFailed: boolean;
 
     var email: String
     var password: String
@@ -17,17 +20,22 @@
         })
 
         if (res.status == 200){
+            hasFailed = false;
             $isLoggedIn = true
             goto('/')
+        }else{
+            hasFailed = true;
         }
     }
 </script>
 
 <body>
     <div class= "container">
+        {#if hasFailed}
+        <ErrorBanner ErrorMessage="Login has failed. Please try again. Contact support if the issue persists."/>
+        {/if}
         <form class="form" id="login">
             <h1 class="login__title">Login</h1>
-            <div class="login__message login__error--message"></div> <!--error message for wrong login details-->
             <div class="login__input-message">
                 <input type="text" bind:value={email} id="email-input" class="login__input" style="background-color: white" placeholder="Email"> <!--input description for username -->
                 <div class="login__input-error-message"></div>
@@ -68,20 +76,10 @@
         background: white;
     } 
 
-    .login__message{
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-
     .login__title{
         margin-bottom: 2rem;
         text-align: center;
         color: black;
-    }
-
-    
-    .login__error--message{
-        color: red;
     }
 
     .login__input-message{
