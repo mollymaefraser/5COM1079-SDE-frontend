@@ -15,8 +15,13 @@
     document.body.className = theme; // "dark" or "light"
   });
 
+  
+
   // After update is a function that runs when the devices theme changes, so we can ensure the website complies
+  
 </script>
+
+
 
 <Navbar/>
 
