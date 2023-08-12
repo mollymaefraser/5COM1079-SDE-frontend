@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { onDestroy, onMount } from 'svelte'
     import { Map, Marker, NavigationControl } from 'maplibre-gl';
     import 'maplibre-gl/dist/maplibre-gl.css';
     import type { MarkerPoint } from '$lib/types/MarkerPoint';
@@ -34,11 +34,16 @@
       map.addControl(new NavigationControl(), 'top-right');
 
       markers.forEach((element: MarkerPoint) => {
+        console.log(element.longitude)
         new Marker({color: "#FF0000"})
         .setLngLat([element.longitude, element.latitude])
         .addTo(map);
         });
   });
+
+  onDestroy(() => {
+		      map.remove();
+	});
 
   </script>
 
