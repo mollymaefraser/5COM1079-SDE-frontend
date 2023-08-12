@@ -12,7 +12,7 @@
             <p>
                 Your health, Our care.
             </p>
-            <a href="#" class="button"> Submit symptom<span class="fa-solid fa-chevron-right"></span></a>
+            <a href="/symptom-checker" class="button"> Submit symptom<span class="fa-solid fa-chevron-right"></span></a>
         </div>
     </section>
     <!--about us section section-->
