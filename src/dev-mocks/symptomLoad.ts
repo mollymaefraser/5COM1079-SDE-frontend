@@ -8,7 +8,13 @@ export default [
     response: () => ([
       "symptom1",
       "symptom2",
-      "symptom3"
+      "symptom3",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f"
     ])
   }
 ] as MockMethod []

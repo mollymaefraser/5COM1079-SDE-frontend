@@ -32,6 +32,7 @@
       <NavLi href="/admin/add-symptoms">Add Symptoms</NavLi>
       <NavLi href="/admin/add-provider">Add Health Provider</NavLi>
       <NavLi href="/admin/add-illness">Add Illness</NavLi>
+      <!-- <NavLi href="/admin/update-illness">Update Illness</NavLi> -->
     {:else if $isLoggedIn == true}
       <NavLi on:click={logout} href="/">Log Out</NavLi>
       <NavLi href="/symptom-checker">Symptom Checker</NavLi>

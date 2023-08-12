@@ -48,6 +48,8 @@
     {/if}
 </div>
 
+<br>
+
 <div class="text-center">
     <Heading
         tag="h1"

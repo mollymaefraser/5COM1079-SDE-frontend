@@ -1,10 +1,15 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { PUBLIC_LOCATION_ADD_URL, PUBLIC_SYMPTOM_ADD_URL } from "$env/static/public";
+    import { PUBLIC_LOCATION_ADD_URL } from "$env/static/public";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import { Label, Input, Button, Heading, Span, P } from "flowbite-svelte";
+
     let longitude: String;
     let latitude: String;
+    let name: String;
+    let address: String;
+    let telephone: String;
+    let email: String;
     let errorMessage: String | Error;
 
     const submitLocation = async () => {
@@ -12,7 +17,11 @@
             method: "POST",
             body: JSON.stringify({
                 longitude: {longitude},
-                latitude: {latitude}
+                latitude: {latitude},
+                name: {name},
+                address: {address},
+                email: {email},
+                telephone: {telephone}
             }),
         });
 
@@ -33,6 +42,8 @@
     {/if}
 </div>
 
+<br>
+
 <div class="text-center">
     <Heading
         tag="h1"
@@ -47,6 +58,10 @@
 
 <div class="mb-6">
     <Label for="location-input" class="block mb-2">Add a Location</Label>
+    <Input id="name-input" placeholder="Name" bind:value={name} />
+    <Input id="add-input" placeholder="Address" bind:value={address} />
+    <Input id="email-input" placeholder="Email" bind:value={email} />
+    <Input id="tel-input" placeholder="Telephone" bind:value={telephone} />
     <Input id="long-input" placeholder="Long" bind:value={longitude} />
     <Input id="lat-input" placeholder="Lat" bind:value={latitude} />
 </div>
