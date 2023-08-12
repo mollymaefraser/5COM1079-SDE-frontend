@@ -1,11 +1,19 @@
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig, searchForWorkspaceRoot } from 'vite'
 
-export default defineConfig({
-	plugins: [sveltekit()],
+import { sveltekit } from '@sveltejs/kit/vite';
+import { searchForWorkspaceRoot } from 'vite'
+import { viteMockServe } from 'vite-plugin-mock';
+import type { UserConfig  } from 'vite';
+
+const config: UserConfig = {
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
+  plugins: [
+    sveltekit(),
+    viteMockServe({
+      mockPath: 'src/dev-mocks'
+    })
+  ],
   server: {
     fs: {
       allow: [
@@ -16,4 +24,7 @@ export default defineConfig({
       ],
     },
   },
-})
+}
+
+export default config;
+
