@@ -1,6 +1,6 @@
 import { PUBLIC_MARKER_LOAD_URL, PUBLIC_SYMPTOM_LOAD_URL } from "$env/static/public";
 import type { MarkerPoint } from "$lib/types/MarkerPoint";
-import type { LayoutData, LayoutServerLoad } from "./$types";
+import type { LayoutServerLoad } from "./$types";
 
 let errorMessageMark: any;
 let errorMessageSymp: any;
