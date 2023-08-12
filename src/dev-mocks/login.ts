@@ -4,6 +4,11 @@ export default [
   {
     url: '/mock/login',
     method: 'post',
-    statusCode: 200
+    statusCode: 200,
+    response: () => [
+      {
+      isAdmin: true
+      }
+    ]
   }
 ] as MockMethod []

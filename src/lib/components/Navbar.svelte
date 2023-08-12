@@ -7,7 +7,8 @@
     NavHamburger,
   } from "flowbite-svelte";
 
-  import isLoggedIn from "$lib/types/stores.js";
+  import isLoggedIn from "$lib/types/loggedInStore.js";
+  import isAdmin from "$lib/types/isAdminStore.js";
   
 
   function logout(){
@@ -34,10 +35,16 @@
           <NavLi href="/symptom-checker">Symptom Checker</NavLi>
           <NavLi href="/find-provider">Find Health Provider</NavLi>
           {@html '<!--The above are the options for a user who is logged in-->'}
+      {:else if $isAdmin == true}
+        <NavLi on:click={logout} href="/">Log Out</NavLi>
+        <NavLi href="/admin/add-symptoms">Add Symptoms</NavLi>
+        <NavLi href="/admin/add-provider">Add Health Provider</NavLi>
+        <NavLi href="/admin/add-illness">Add Illness</NavLi>
       {:else}
       <NavLi href="/login">Login</NavLi>
       <NavLi href="/sign-up">Sign Up</NavLi>
       {@html '<!--The above are the options for users who are not signed in, and the buttons take you to the relating pages-->'}
       {/if}
+
     </NavUl>
   </Navbar>

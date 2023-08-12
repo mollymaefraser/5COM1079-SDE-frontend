@@ -1,115 +1,154 @@
-{@html '<!--I have created an input for the login form with placeholders for both username and password-->'}
-
 <script lang="ts">
-    import isLoggedIn from "$lib/types/stores.js";
-    import { PUBLIC_LOGIN_URL } from '$env/static/public'
+    import isLoggedIn from "$lib/types/loggedInStore.js";
+    import isAdmin from "$lib/types/isAdminStore";
+    import { PUBLIC_LOGIN_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
 
     var hasFailed: boolean;
 
-    var email: String
-    var password: String
+    type LoginResponse = {
+        isAdmin: boolean
+    }
+
+    var email: String;
+    var password: String;
     const submit = async () => {
         const res = await fetch(`${PUBLIC_LOGIN_URL}`, {
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify({
-                email: {email},
-                password: {password}
-            })
-        })
+                email: { email },
+                password: { password },
+            }),
+        });
 
-        if (res.status == 200){
+        let resp: LoginResponse[] = await res.json();
+
+        console.log(resp[0].isAdmin)
+
+        if (resp[0].isAdmin == true) {
             hasFailed = false;
-            $isLoggedIn = true
-            goto('/')
-        }else{
+            $isAdmin = true;
+            goto("/");
+        }
+
+        if (res.status == 200) {
+            hasFailed = false;
+            $isLoggedIn = true;
+            goto("/");
+        } else {
             hasFailed = true;
         }
-    }
+    };
 </script>
 
+{@html "<!--I have created an input for the login form with placeholders for both username and password-->"}
+
 <body>
-    <div class= "container">
+    <div class="container">
         {#if hasFailed}
-        <ErrorBanner ErrorMessage="Login has failed. Please try again. Contact support if the issue persists."/>
+            <ErrorBanner
+                ErrorMessage="Login has failed. Please try again. Contact support if the issue persists."
+            />
         {/if}
         <form class="form" id="login">
             <h1 class="login__title">Login</h1>
             <div class="login__input-message">
-                <input type="text" bind:value={email} id="email-input" class="login__input" style="background-color: white" placeholder="Email"> <!--input description for username -->
-                <div class="login__input-error-message"></div>
+                <input
+                    type="text"
+                    bind:value={email}
+                    id="email-input"
+                    class="login__input"
+                    style="background-color: white"
+                    placeholder="Email"
+                />
+                <!--input description for username -->
+                <div class="login__input-error-message" />
             </div>
             <div class="login__input-message">
-                <input type="password" bind:value={password} id="password-input" class="login__input" style="background-color: white" placeholder="Password"> <!--input description and placeholder for password -->
-                <div class="login__input-error-message"></div>
-            </div>            
-            <button class="login__button" type="submit" on:click|preventDefault={() => {submit()}}>Login</button> <!--login button with type submit-->
-            <br>
-            <br>
-            <br>
+                <input
+                    type="password"
+                    bind:value={password}
+                    id="password-input"
+                    class="login__input"
+                    style="background-color: white"
+                    placeholder="Password"
+                />
+                <!--input description and placeholder for password -->
+                <div class="login__input-error-message" />
+            </div>
+            <button
+                class="login__button"
+                type="submit"
+                on:click|preventDefault={() => {
+                    submit();
+                }}>Login</button
+            >
+            <!--login button with type submit-->
+            <br />
+            <br />
+            <br />
         </form>
     </div>
 </body>
 
-
-{@html '<!--setting properties for the body, container, -->'}
+{@html "<!--setting properties for the body, container, -->"}
 
 <style>
-    body{ /*should vertically and horizontally center the container for the form*/
+    body {
+        /*should vertically and horizontally center the container for the form*/
         align-items: center;
         justify-content: center;
         font-size: 18px;
         margin: 0;
-        height: 100vh; 
-        display: flex; 
+        height: 100vh;
+        display: flex;
         background: url(./Login-page-background.jpg);
         background-size: cover; /* so the image takes up the entire width of the background */
-
     }
-    .container{
+    .container {
         min-height: 350px;
         max-width: 400px; /* both width and max width should scale the page across different device type(responsive) */
         margin: 1rem; /* one unit of the base font size */
         padding: 2rem;
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.2) ;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
         border-radius: 4px;
         background: white;
-    } 
+    }
 
-    .login__title{
+    .login__title {
         margin-bottom: 2rem;
         text-align: center;
         color: black;
     }
 
-    .login__input-message{
+    .login__input-message {
         color: black;
         margin-bottom: 1rem; /* would create some space between the input fields */
     }
 
-    .login__input{
+    .login__input {
         display: block;
         width: 100%;
         box-sizing: border-box;
-        padding: 0.60rem;
+        padding: 0.6rem;
         border-radius: 4px;
         outline: none;
         border: 1px solid lightgrey;
         background: grey;
         color: black;
-        transition: background 0.2s, border-color 0.2s;/*transition on the inputfield background colour */
+        transition: background 0.2s, border-color 0.2s; /*transition on the inputfield background colour */
     }
 
-    .login__input:focus{ /*changes the background colur of the input field in focus to white*/
+    .login__input:focus {
+        /*changes the background colur of the input field in focus to white*/
         border-color: green;
         background: white;
         color: black;
-
     }
 
-    .login__button{
-        width:100% ; 
+    .login__button {
+        width: 100%;
         padding: 1rem 2rem;
         font-weight: bold;
         font-size: 1.1rem;
@@ -121,13 +160,12 @@
         background: green;
     }
 
-    .login__button:hover{
-       background: darkgreen; 
+    .login__button:hover {
+        background: darkgreen;
     }
-    
+
     /*reduce the size of the button by 2% when clicked*/
-    .login__button:active{
+    .login__button:active {
         transform: scale(0.98);
-        
     }
 </style>
