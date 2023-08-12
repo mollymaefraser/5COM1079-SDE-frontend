@@ -1,8 +1,46 @@
 {@html '<!--I have created an input for the signup form with placeholders for both name, email, password and confirm password-->'}
+<script lang="ts">
+    import isLoggedIn from "$lib/types/stores.js";
+    import { PUBLIC_LOGIN_URL, PUBLIC_SIGNUP_URL } from '$env/static/public'
+    import { goto } from "$app/navigation";
+    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
+
+    var hasFailed: boolean;
+
+    var email: String
+    var password: String
+    var firstName: String
+    var lastName: String
+
+    const submit = async () => {
+        const res = await fetch(`${PUBLIC_SIGNUP_URL}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                firstName: {firstName},
+                lastName: {lastName},
+                email: {email},
+                password: {password}
+            })
+        })
+
+        if (res.status == 200){
+            hasFailed = false;
+            $isLoggedIn = true
+            goto('/')
+        }else{
+            hasFailed = true;
+        }
+    }
+</script>
+
 
 <body>
 
     <div class="signupform">
+
+        {#if hasFailed}
+        <ErrorBanner ErrorMessage="Sign Up has failed. Please try again. Contact support if the issue persists."/>
+        {/if}
 
         <form class="form">
             <h1 class="signup__title">Sign up</h1>
@@ -27,7 +65,7 @@
                 <input type="text" class="login__input" style="background-color: white" placeholder="Confirm Password" required> <!--input description to confirm password -->
             </div>
 
-            <button class="signup__button" type="submit">Sign up</button> <!--signup button with type submit-->
+            <button class="signup__button" type="submit" on:click|preventDefault={() => {submit()}}>Sign up</button> <!--signup button with type submit-->
 
 
         </form>

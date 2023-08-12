@@ -4,9 +4,11 @@ export default [
   {
     url: '/mock/symptom-loader',
     method: 'get',
+    timeout: 2000,
     response: () => ([
       "symptom1",
       "symptom2",
+      "symptom3"
     ])
   }
 ] as MockMethod []

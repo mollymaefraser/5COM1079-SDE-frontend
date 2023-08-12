@@ -1,9 +1,6 @@
 <script lang ="ts">
   import "../app.postcss";
 
-  import { isLoggedIn } from "../stores";
-
-  
   import DarkMode from "svelte-dark-mode";
   import { afterUpdate } from "svelte";
 
@@ -12,6 +9,7 @@
 
 
   let theme;
+  
 
   afterUpdate(() => {
     document.body.className = theme; // "dark" or "light"
