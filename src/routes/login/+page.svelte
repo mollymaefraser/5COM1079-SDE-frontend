@@ -29,6 +29,7 @@
         if (resp[0].isAdmin == true) {
             hasFailed = false;
             $isAdmin = true;
+            $isLoggedIn = false;
             goto("/");
         }
 
