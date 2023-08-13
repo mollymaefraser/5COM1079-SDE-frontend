@@ -1,6 +1,6 @@
 {@html '<!--I have created an input for the signup form with placeholders for both name, email, password and confirm password-->'}
 <script lang="ts">
-    import isLoggedIn from "$lib/types/stores.js";
+    import isLoggedIn from "$lib/types/loggedInStore.js";
     import { PUBLIC_LOGIN_URL, PUBLIC_SIGNUP_URL } from '$env/static/public'
     import { goto } from "$app/navigation";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";

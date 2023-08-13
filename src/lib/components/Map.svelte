@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
   import { Map, Marker, NavigationControl } from "maplibre-gl";
   import "maplibre-gl/dist/maplibre-gl.css";
-  import type { MarkerPoint } from "$lib/types/MarkerPoint";
+  import type { LocationLoad } from "$lib/types/LocationLoad";
 
   let map: Map;
   let mapContainer: string | HTMLElement;
 
-  export let markers: MarkerPoint[] = [];
+  export let locations: LocationLoad[] = [];
 
   const apiKey = "U6Q44BrLCIKE3mhBEMv9";
 
@@ -36,16 +36,11 @@
         .setLngLat([longitude, latitude])
         .addTo(map);
 
-    markers.forEach((element: MarkerPoint) => {
-      console.log(element.longitude);
+    locations.forEach((element: LocationLoad) => {
       new Marker({ color: "#FF0000" })
         .setLngLat([element.longitude, element.latitude])
         .addTo(map);
     });
-  });
-
-  onDestroy(() => {
-    map.remove();
   });
 </script>
 

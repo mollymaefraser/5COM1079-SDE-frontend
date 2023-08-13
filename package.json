@@ -47,6 +47,7 @@
     "maplibre-gl": "^3.3.0",
     "mockjs": "^1.1.0",
     "n": "^9.1.0",
+    "svelte-materialify": "^0.3.11",
     "tailwind-merge": "^1.14.0",
     "vite-plugin-mock": "^2.9.8",
     "vite-plugin-mock-server": "^1.1.0",
