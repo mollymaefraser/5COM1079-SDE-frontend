@@ -3,7 +3,7 @@ import type { MockMethod } from 'vite-plugin-mock'
 
 export default [
   {
-    url: '/mock/marker-loader',
+    url: '/mock/illness-loader',
     method: 'get',
     timeout: 2000,
     response: () => [

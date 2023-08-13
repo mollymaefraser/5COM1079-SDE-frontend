@@ -1,6 +1,5 @@
 import { PUBLIC_MARKER_LOAD_URL, PUBLIC_SYMPTOM_LOAD_URL, PUBLIC_ILLNESS_LOAD_URL } from "$env/static/public";
-import type { MarkerPoint } from "$lib/types/MarkerPoint";
-import type { Illness } from "$lib/types/illness";
+import type { LocationLoad } from "$lib/types/LocationLoad";
 import type { LayoutServerLoad } from "./$types";
 
 let errorMessageMark: any;
@@ -16,7 +15,7 @@ export const load = (async () => {
         errorMessageMark = "Failed to load locations. Please refresh and try again. If the problem persists, contact support."
     }
 
-    const markers: MarkerPoint[] = await mark.json();
+    const locations: LocationLoad[] = await mark.json();
 
     const symp = await fetch(`${PUBLIC_SYMPTOM_LOAD_URL}`, {
         method: 'GET'
@@ -40,7 +39,7 @@ export const load = (async () => {
 
     return { 
         symptoms: symptoms,
-        markers: markers,
+        locations: locations,
         errorMessages: {
             mark: errorMessageMark,
             symp: errorMessageSymp,
