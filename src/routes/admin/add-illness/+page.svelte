@@ -75,3 +75,15 @@
 <div class="submitter">
     <Button on:click={submitIllness}>Submit</Button>
 </div>
+
+<style>
+    .mb-6{
+        max-width: 40%;
+        text-align: center;
+        margin: auto;
+    }
+    .submitter{
+        padding: 50px;
+        text-align: center;
+    }
+</style>

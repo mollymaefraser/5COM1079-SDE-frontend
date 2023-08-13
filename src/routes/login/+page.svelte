@@ -24,8 +24,6 @@
 
         let resp: LoginResponse[] = await res.json();
 
-        console.log(resp[0].isAdmin)
-
         if (resp[0].isAdmin == true) {
             hasFailed = false;
             $isAdmin = true;
