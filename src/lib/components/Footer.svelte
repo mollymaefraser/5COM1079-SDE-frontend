@@ -14,10 +14,10 @@ import { Footer, FooterCopyright, FooterLinkGroup, FooterBrand, FooterLink } fro
         name="MedIntelligence"
       />
       <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-        <FooterLink href="/">About</FooterLink>
-        <FooterLink href="/">Privacy Policy</FooterLink>
-        <FooterLink href="/">Licensing</FooterLink>
-        <FooterLink href="/">Contact</FooterLink>
+        <FooterLink href="/about">About</FooterLink>
+        <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+        <FooterLink href="/licensing">Licensing</FooterLink>
+        <FooterLink href="/contact">Contact</FooterLink>
       </FooterLinkGroup>
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />

@@ -1,0 +1,1 @@
+<p><strong>This website is licensed under the Creative Commons license</strong></p>

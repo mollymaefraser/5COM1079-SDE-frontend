@@ -52,7 +52,7 @@
         ><Span gradient>Location Adder</Span></Heading
     >
     <P class="mb-6 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
-        >Simply enter the location you would like to add. These will then be available for our clients to select and help diagnose.</P
+        >Simply enter the provider you would like to add. These will then be available for our clients to select and help diagnose.</P
     >
 </div>
 
