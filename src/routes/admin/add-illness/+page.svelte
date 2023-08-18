@@ -73,7 +73,7 @@
 </div>
 
 <div class="submitter">
-    <Button on:click={submitIllness}>Submit</Button>
+    <Button color="light" on:click={submitIllness}>Submit</Button>
 </div>
 
 <style>

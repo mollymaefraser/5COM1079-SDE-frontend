@@ -39,6 +39,9 @@
     background: #032f62;
     color: #f1f8ff;
   }
+  :global(.light){
+    background: #c5eeaa;
+  }
 </style>
 
 

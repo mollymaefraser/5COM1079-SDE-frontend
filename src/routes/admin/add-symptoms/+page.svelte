@@ -49,7 +49,7 @@
 </div>
 
 <div class="submitter">
-    <Button on:click={submitSymptom}>Submit</Button>
+    <Button color="light" on:click={submitSymptom}>Submit</Button>
 </div>
 
 

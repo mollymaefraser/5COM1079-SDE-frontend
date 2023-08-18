@@ -67,7 +67,7 @@
 </div>
 
 <div class="submitter">
-    <Button on:click={submitLocation}>Submit</Button>
+    <Button color="light" on:click={submitLocation}>Submit</Button>
 </div>
 
 <style>
