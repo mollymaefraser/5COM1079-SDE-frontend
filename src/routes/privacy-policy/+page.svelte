@@ -60,4 +60,4 @@
 <br>
 <p><strong>Contact</strong></p>
 <br>
-<p>Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to [name and address or e-mail address].</p>
+<p>Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to privacy@medintelligence.co.uk.</p>

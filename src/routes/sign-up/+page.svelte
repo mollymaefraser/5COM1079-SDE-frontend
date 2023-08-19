@@ -58,11 +58,11 @@
             </div>
 
             <div class="signup_message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Password" required> <!--input description for password -->
+                <input type="password" class="login__input" style="background-color: white" placeholder="Password" required> <!--input description for password -->
             </div>
 
             <div class="signup_message">
-                <input type="text" class="login__input" style="background-color: white" placeholder="Confirm Password" required> <!--input description to confirm password -->
+                <input type="password" class="login__input" style="background-color: white" placeholder="Confirm Password" required> <!--input description to confirm password -->
             </div>
 
             <button class="signup__button" type="submit" on:click|preventDefault={() => {submit()}}>Sign up</button> <!--signup button with type submit-->
