@@ -40,7 +40,7 @@
     color: #f1f8ff;
   }
   :global(.light){
-    background: #f1f8ff;
+    background: #f9fff1;
   }
 </style>
 
