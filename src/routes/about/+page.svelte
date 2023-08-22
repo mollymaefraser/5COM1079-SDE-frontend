@@ -210,9 +210,9 @@ We take pride in our patient-oriented approach, offering a wide range of service
     .heading{
         text-align: center;
         padding-bottom: 2rem;
-        text-shadow: 2px 2px 1px #777;
+        text-shadow: 2px 2px 1px green;
         text-transform: uppercase;
-        color: #444;
+        color: green;
         font-size: 3.5rem;
         letter-spacing: .2rem;
     }
@@ -247,14 +247,14 @@ We take pride in our patient-oriented approach, offering a wide range of service
 
     .about .content h3{
         font-size: 3.5rem;
-        color: #444;
+        color: green;
         line-height: 1.2;
-        text-shadow: 1px 2px 1px #777;
+        text-shadow: 1px 2px 1px green;
     }
 
     .about .content p{
         font-size: 20px;
-        color: #777;
+        color: green;
         line-height: 1.8;
         padding: 1rem 0;
         
@@ -288,7 +288,7 @@ We take pride in our patient-oriented approach, offering a wide range of service
     }
 
     .about_page .row .content h3{
-        color: #444;
+        color: green;
         text-shadow: .2rem .2rem 0 rgba(0, 0, 0, .2);
         font-size: 3.0rem;
         line-height: 1.8;
@@ -297,7 +297,7 @@ We take pride in our patient-oriented approach, offering a wide range of service
 
     .about_page .row .content p{
         font-size: 15px;
-        color: #777;
+        color: green;
         padding: 1rem 0;
         line-height: 1.8;
     }
@@ -339,7 +339,7 @@ We take pride in our patient-oriented approach, offering a wide range of service
 
     .icons_container .icons p{
         font-size: 15px;
-        color: #777;
+        color: green;
     }
 /* services styling*/
     .services .service-container{
@@ -369,14 +369,14 @@ We take pride in our patient-oriented approach, offering a wide range of service
     }
 
     .services .service-container .container h3{
-        color: #444;
+        color: green;
         font-size: 1.5rem;
         padding: 1rem 0;
         
     }
 
     .services .service-container .container p{
-        color: #777;
+        color: green;
         font-size: 15px;
         line-height: 2;
         
@@ -392,14 +392,14 @@ We take pride in our patient-oriented approach, offering a wide range of service
 
     .Symptom .checker h3{
         font-size: 2.5rem;
-        color: #444;
+        color: green;
         line-height: 1.2;
-        text-shadow: 1px 2px 1px #777;
+        text-shadow: 1px 2px 1px green;
     }
 
     .Symptom .checker p{
         font-size: 1.5rem;
-        color: #777;
+        color: green;
         line-height: 1.8;
         padding: 1rem 0;
         
