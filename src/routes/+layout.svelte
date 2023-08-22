@@ -36,7 +36,7 @@
 
 <style>
   :global(.dark) {
-    background: #032f62;
+    background: #242d37;
     color: #f1f8ff;
   }
 </style>
