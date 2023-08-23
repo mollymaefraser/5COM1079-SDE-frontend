@@ -6,6 +6,8 @@
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import type { LayoutData } from "../$types";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
+    import Swal from "sweetalert2";
+    import loggedInStore from "$lib/types/loggedInStore";
 
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
@@ -49,6 +51,15 @@
 
         diagnosisReturn = await res.json();
     };
+
+    const fireRedirect = async () => {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You are not logged in! Redirect to the login page below...",
+            footer: '<a href="/login">Login</a>',
+        });
+    };
 </script>
 
 <div class="error-message">
@@ -57,34 +68,38 @@
     {/if}
 </div>
 
-<br>
+<br />
 
-<div class="text-center">
-    <Heading
-        tag="h1"
-        class="mb-4"
-        customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
-        ><Span gradient>Symptom Checker</Span></Heading
-    >
-    <P class="mb-6 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
-        >Simply select the symptoms below that you are suffering from in order
-        to recieve a predictive diagnosis.</P
-    >
-</div>
+{#if $loggedInStore == true}
+    <div class="text-center">
+        <Heading
+            tag="h1"
+            class="mb-4"
+            customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
+            ><Span gradient>Symptom Checker</Span></Heading
+        >
+        <P class="mb-6 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
+            >Simply select the symptoms below that you are suffering from in
+            order to recieve a predictive diagnosis.</P
+        >
+    </div>
 
-<div class="condition-result">
-    <Heading tag="h2">Your condition(s): {diagnosis}</Heading>
-    <p>Condition description(s): {description}</p>
-    <p>Condition advice: {advice}</p>
-</div>
+    <div class="condition-result">
+        <Heading tag="h2">Your condition(s): {diagnosis}</Heading>
+        <p>Condition description(s): {description}</p>
+        <p>Condition advice: {advice}</p>
+    </div>
 
-<div class="symptoms">
-    <MultiSelect items={symptomsToChoose} bind:value={symptomsChosen} />
-</div>
+    <div class="symptoms">
+        <MultiSelect items={symptomsToChoose} bind:value={symptomsChosen} />
+    </div>
 
-<div class="submitter">
-    <Button color="light" on:click={submitSymptoms}>Submit</Button>
-</div>
+    <div class="submitter">
+        <Button color="light" on:click={submitSymptoms}>Submit</Button>
+    </div>
+{:else}
+    <p hidden>{fireRedirect()}</p>
+{/if}
 
 <style>
     .text-center {

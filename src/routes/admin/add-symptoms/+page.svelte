@@ -2,7 +2,9 @@
     import { goto } from "$app/navigation";
     import { PUBLIC_SYMPTOM_ADD_URL } from "$env/static/public";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
+    import isAdminStore from "$lib/types/isAdminStore";
     import { Label, Input, Button, Heading, Span, P } from "flowbite-svelte";
+    import Swal from "sweetalert2";
     let symptom: String;
     let errorMessage: String | Error;
 
@@ -17,7 +19,16 @@
                 "Failed to add symptom. Please refresh and try again. If the problem persists, contact support.";
         }
 
-        goto("/")
+        goto("/");
+    };
+
+    const fireRedirect = async () => {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You are not an admin!! Redirect to the home page below...",
+            footer: '<a href="/">Home</a>',
+        });
     };
 </script>
 
@@ -29,37 +40,41 @@
     {/if}
 </div>
 
-<br>
+<br />
 
-<div class="text-center">
-    <Heading
-        tag="h1"
-        class="mb-4"
-        customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
-        ><Span gradient>Symptom Adder</Span></Heading
-    >
-    <P class="mb-6 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
-        >Simply enter the symptom you would like to add. These will then be available for our clients to select and help diagnose.</P
-    >
-</div>
+{#if $isAdminStore == true}
+    <div class="text-center">
+        <Heading
+            tag="h1"
+            class="mb-4"
+            customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
+            ><Span gradient>Symptom Adder</Span></Heading
+        >
+        <P class="mb-6 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
+            >Simply enter the symptom you would like to add. These will then be
+            available for our clients to select and help diagnose.</P
+        >
+    </div>
 
-<div class="mb-6">
-    <Label for="symptom-input" class="block mb-2">Add a Symptom</Label>
-    <Input id="symptom-input" placeholder="Coughing" bind:value={symptom} />
-</div>
+    <div class="mb-6">
+        <Label for="symptom-input" class="block mb-2">Add a Symptom</Label>
+        <Input id="symptom-input" placeholder="Coughing" bind:value={symptom} />
+    </div>
 
-<div class="submitter">
-    <Button color="light" on:click={submitSymptom}>Submit</Button>
-</div>
-
+    <div class="submitter">
+        <Button color="light" on:click={submitSymptom}>Submit</Button>
+    </div>
+{:else}
+    <p hidden>{fireRedirect()}</p>
+{/if}
 
 <style>
-    .mb-6{
+    .mb-6 {
         max-width: 40%;
         text-align: center;
         margin: auto;
     }
-    .submitter{
+    .submitter {
         padding: 50px;
         text-align: center;
     }
