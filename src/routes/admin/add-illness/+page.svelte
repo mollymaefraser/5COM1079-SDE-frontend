@@ -14,7 +14,6 @@
     import type { LayoutData } from "../../$types";
     import { onMount } from "svelte";
     import { PUBLIC_ILLNESS_ADD_URL } from "$env/static/public";
-    import Swal from 'sweetalert2';
     import isAdminStore from "$lib/types/isAdminStore";
 
     let name: String;
@@ -51,12 +50,7 @@
     };
 
     const fireRedirect = async () => {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "You are not an admin!! Redirect to the home page below...",
-            footer: '<a href="/">Home</a>',
-        });
+        goto("/")
     };
 </script>
 

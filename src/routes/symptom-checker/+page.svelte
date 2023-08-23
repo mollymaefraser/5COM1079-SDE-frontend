@@ -6,8 +6,8 @@
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import type { LayoutData } from "../$types";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
-    import Swal from "sweetalert2";
     import loggedInStore from "$lib/types/loggedInStore";
+    import { goto } from "$app/navigation";
 
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
@@ -53,12 +53,7 @@
     };
 
     const fireRedirect = async () => {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "You are not logged in! Redirect to the login page below...",
-            footer: '<a href="/login">Login</a>',
-        });
+        goto("/login")
     };
 </script>
 

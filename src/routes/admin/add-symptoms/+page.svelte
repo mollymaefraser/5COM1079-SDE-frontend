@@ -4,7 +4,6 @@
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import isAdminStore from "$lib/types/isAdminStore";
     import { Label, Input, Button, Heading, Span, P } from "flowbite-svelte";
-    import Swal from 'sweetalert2';
     let symptom: String;
     let errorMessage: String | Error;
 
@@ -23,12 +22,7 @@
     };
 
     const fireRedirect = async () => {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "You are not an admin!! Redirect to the home page below...",
-            footer: '<a href="/">Home</a>',
-        });
+        goto("/")
     };
 </script>
 

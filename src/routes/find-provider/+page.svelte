@@ -3,18 +3,13 @@
     import Map from "$lib/components/Map.svelte";
     import { Card, Heading, Span } from "flowbite-svelte";
     import type { LayoutData } from "../$types";
-    import Swal from "sweetalert2";
     import loggedInStore from "$lib/types/loggedInStore";
+    import { goto } from "$app/navigation";
 
     export let data: LayoutData; // undefined somehow
 
     const fireRedirect = async () => {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "You are not logged in! Redirect to the login page below...",
-            footer: '<a href="/login">Login</a>',
-        });
+        goto("/login")
     };
 </script>
 
