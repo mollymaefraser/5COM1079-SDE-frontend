@@ -6,7 +6,8 @@
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import type { LayoutData } from "../$types";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
-    import Swal from "sweetalert2";
+    import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
     import loggedInStore from "$lib/types/loggedInStore";
 
     let symptomsChosen: string[] = [];

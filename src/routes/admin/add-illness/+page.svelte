@@ -14,7 +14,8 @@
     import type { LayoutData } from "../../$types";
     import { onMount } from "svelte";
     import { PUBLIC_ILLNESS_ADD_URL } from "$env/static/public";
-    import Swal from "sweetalert2";
+    import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
     import isAdminStore from "$lib/types/isAdminStore";
 
     let name: String;
