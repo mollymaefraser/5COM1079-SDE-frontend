@@ -3,8 +3,7 @@
     import Map from "$lib/components/Map.svelte";
     import { Card, Heading, Span } from "flowbite-svelte";
     import type { LayoutData } from "../$types";
-    import Swal from 'sweetalert2/dist/sweetalert2.js';
-import 'sweetalert2/src/sweetalert2.scss';
+    import Swal from "sweetalert2";
     import loggedInStore from "$lib/types/loggedInStore";
 
     export let data: LayoutData; // undefined somehow

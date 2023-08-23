@@ -4,8 +4,7 @@
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import isAdminStore from "$lib/types/isAdminStore";
     import { Label, Input, Button, Heading, Span, P } from "flowbite-svelte";
-    import Swal from 'sweetalert2/dist/sweetalert2.js';
-import 'sweetalert2/src/sweetalert2.scss';
+    import Swal from 'sweetalert2';
 
     let longitude: String;
     let latitude: String;

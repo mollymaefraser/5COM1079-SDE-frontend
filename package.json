@@ -43,6 +43,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "flowbite": "^1.7.0",
     "flowbite-svelte": "^0.40.2",
+    "force": "^0.0.3",
     "lottie-player": "^1.0.0",
     "maplibre-gl": "^3.3.0",
     "mockjs": "^1.1.0",
