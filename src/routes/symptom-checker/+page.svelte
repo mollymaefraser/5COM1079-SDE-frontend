@@ -8,6 +8,7 @@
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
+    import { browser } from "$app/environment";
 
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
@@ -53,7 +54,9 @@
     };
 
     const fireRedirect = async () => {
-        goto("/login")
+        if(browser){
+            goto("/login")
+        }
     };
 </script>
 

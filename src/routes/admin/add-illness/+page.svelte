@@ -15,6 +15,7 @@
     import { onMount } from "svelte";
     import { PUBLIC_ILLNESS_ADD_URL } from "$env/static/public";
     import isAdminStore from "$lib/types/isAdminStore";
+    import { browser } from "$app/environment";
 
     let name: String;
     let advice: String;
@@ -50,7 +51,9 @@
     };
 
     const fireRedirect = async () => {
-        goto("/")
+        if(browser){
+            goto("/")
+        }
     };
 </script>
 

@@ -5,11 +5,14 @@
     import type { LayoutData } from "../$types";
     import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
+    import { browser } from "$app/environment";
 
     export let data: LayoutData; // undefined somehow
 
     const fireRedirect = async () => {
-        goto("/login")
+        if(browser){
+            goto("/login")
+        }
     };
 </script>
 

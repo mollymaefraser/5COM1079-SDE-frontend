@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
     import { goto } from "$app/navigation";
     import { PUBLIC_SYMPTOM_ADD_URL } from "$env/static/public";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
@@ -22,7 +23,9 @@
     };
 
     const fireRedirect = async () => {
-        goto("/")
+        if(browser){
+            goto("/")
+        }
     };
 </script>
 
