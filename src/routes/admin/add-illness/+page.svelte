@@ -92,7 +92,7 @@
         />
         <Input id="advice-input" placeholder="Advice" bind:value={advice} />
         <div class="symptoms">
-            <MultiSelect items={symptomsToChoose} bind:value={symptomsChosen} class="bg-gray-50" />
+            <MultiSelect dropdownClass="!dark:bg-gray-50 bg-gray-50 hover:text-black" class="!dark:bg-gray-50 bg-gray-50 hover:text-black" items={symptomsToChoose} bind:value={symptomsChosen} />
         </div>
     </div>
 

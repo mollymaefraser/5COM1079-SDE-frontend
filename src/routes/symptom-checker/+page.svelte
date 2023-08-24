@@ -89,7 +89,7 @@
     </div>
 
     <div class="symptoms">
-        <MultiSelect dropdownClass="!bg-stone-100 hover:text-black" class="!bg-stone-100 hover:text-black" items={symptomsToChoose} bind:value={symptomsChosen} />
+        <MultiSelect dropdownClass="!dark:bg-gray-50 hover:text-black bg-gray-50" class="!dark:bg-gray-50 bg-gray-50 hover:text-black" items={symptomsToChoose} bind:value={symptomsChosen} />
     </div>
 
     <div class="submitter">
