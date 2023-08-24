@@ -8,7 +8,7 @@
   } from "flowbite-svelte";
 </script>
 
-<div class="footer">
+<footer class="footer">
   <Footer footerType="logo">
     <div class="sm:flex sm:items-center sm:justify-between">
       <FooterBrand
@@ -29,13 +29,11 @@
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <FooterCopyright href="/" by="MedIntelligence™" />
   </Footer>
-</div>
+</footer>
 
 <style>
   .footer {
-    position:absolute;
-   bottom:0;
-   width:100%;
-   height:60px;   /* Height of the footer */
+    width: 100%;
+    height: 60px; /* Height of the footer */
   }
 </style>

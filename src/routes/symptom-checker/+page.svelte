@@ -89,7 +89,7 @@
     </div>
 
     <div class="symptoms">
-        <MultiSelect items={symptomsToChoose} bind:value={symptomsChosen} />
+        <MultiSelect dropdownClass="!bg-stone-100 hover:text-black" class="!bg-stone-100 hover:text-black" items={symptomsToChoose} bind:value={symptomsChosen} />
     </div>
 
     <div class="submitter">
@@ -108,9 +108,16 @@
     .condition-result {
         padding: 70px;
     }
+
+    .symptoms{
+        padding-left: 10%;
+        padding-right: 10%;
+    }
     
     .submitter {
-        padding: 70px;
+        padding-top: 40px;
+        padding-bottom: 100px;
         text-align: center;
+        margin-bottom: 60px;
     }
 </style>

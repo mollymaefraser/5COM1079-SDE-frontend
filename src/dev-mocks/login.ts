@@ -7,7 +7,9 @@ export default [
     statusCode: 200,
     response: () => [
       {
-      isAdmin: false
+      isAdmin: false,
+      firstName: "Joe",
+      lastName: "Bloggs"
       }
     ]
   }
