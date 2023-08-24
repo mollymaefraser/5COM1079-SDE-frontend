@@ -6,12 +6,13 @@
     import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
+    import Footer from "$lib/components/Footer.svelte";
 
     export let data: LayoutData; // undefined somehow
 
     const fireRedirect = async () => {
-        if(browser){
-            goto("/login")
+        if (browser) {
+            goto("/login");
         }
     };
 </script>
@@ -23,7 +24,7 @@
 </div>
 
 {#if $loggedInStore == true}
-    <div class="heading">
+    <div class="provider-header">
         <Heading
             tag="h1"
             class="mb-4"
@@ -32,17 +33,20 @@
         >
     </div>
 
+    <div class="details-header">
+        <Heading
+            tag="h1"
+            class="mb-4"
+            customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
+            ><Span gradient>Location Details</Span></Heading
+        >
+    </div>
+
     <div class="map">
         <Map locations={data.locations} />
     </div>
 
     <div class="locations">
-        <Heading
-            tag="h1"
-            class="mb-4"
-            customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
-            ><Span gradient>Location Details:</Span></Heading
-        >
         <div class="row">
             {#each data.locations as location}
                 <div class="col-sm">
@@ -60,14 +64,37 @@
     <p hidden>{fireRedirect()}</p>
 {/if}
 
+<div class="footer">
+    <Footer />
+</div>
+
 <style>
+    .map {
+        float: left;
+        width: 50%;
+        padding-bottom: 100px;
+    }
+    .footer {
+        position: relative;
+        bottom: 0;
+        padding-top: 1000px;
+        width: 100%;
+        height: 60px; /* Height of the footer */
+    }
     .locations {
-        padding: 30px;
+        float: right;
+        width: 50%;
+        padding-left: 30px;
     }
     .row {
         display: inline-flex;
     }
-    .heading {
-        padding: 30px;
+    .details-header {
+        padding-top: 50px;
+        float: right;
+    }
+    .provider-header {
+        padding-top: 50px;
+        float: left;
     }
 </style>

@@ -108,6 +108,7 @@
     .condition-result {
         padding: 70px;
     }
+    
     .submitter {
         padding: 70px;
         text-align: center;

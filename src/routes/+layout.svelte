@@ -6,6 +6,7 @@
 
   import Footer from "$lib/components/Footer.svelte";
   import Navbar from "$lib/components/Navbar.svelte";
+    import { page } from "$app/stores";
 
 
   let theme;
@@ -30,7 +31,12 @@
 <slot />
 {@html '<!--Slot is where the actual page content goes (as layout covers the layout of all pages)-->'}
 
-<Footer/>
+
+{#if $page.url.pathname !== '/find-provider'}
+  <div class="footer">
+    <Footer/>
+  </div>
+{/if}
 
 {@html '<!--The above is the footer that is shown on each page-->'}
 
