@@ -9,7 +9,8 @@ export default [
       {
       isAdmin: false,
       firstName: "Joe",
-      lastName: "Bloggs"
+      lastName: "Bloggs",
+      email: "joe.bloggs@email.com"
       }
     ]
   }
