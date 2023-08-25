@@ -4,7 +4,6 @@ import type { LayoutServerLoad } from "./$types";
 
 let errorMessageMark: any;
 let errorMessageSymp: any;
-let errorMessageIll: any;
 
 export const load = (async () => {
     const mark = await fetch(`${PUBLIC_MARKER_LOAD_URL}`, {
