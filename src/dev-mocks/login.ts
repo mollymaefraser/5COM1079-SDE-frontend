@@ -10,7 +10,8 @@ export default [
       isAdmin: false,
       firstName: "Joe",
       lastName: "Bloggs",
-      email: "joe.bloggs@email.com"
+      email: "joe.bloggs@email.com",
+      userID: 2
       }
     ]
   }
