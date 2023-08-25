@@ -9,10 +9,11 @@
     import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
+    import type { PredictionReturn } from "$lib/types/predictionReturn";
 
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
-    let diagnosisReturn: DiagnosisReturn[] = [];
+    let diagnosisReturn: PredictionReturn[] = [];
 
     $: diagnosis = "";
     $: description = "";
@@ -23,13 +24,13 @@
         let tempStrAdvice = "";
         let tempStrDescription = "";
         if (i == 0) {
-            tempStrCondition = `${diagnosisReturn[i].condition}`;
-            tempStrAdvice = `${diagnosisReturn[i].advice}`;
-            tempStrDescription = ` ${diagnosisReturn[i].description}`;
+            tempStrCondition = `${diagnosisReturn[i].illness.illnessName}`;
+            tempStrAdvice = `${diagnosisReturn[i].illness.illnessAdvice}`;
+            tempStrDescription = ` ${diagnosisReturn[i].illness.illnessDescription}`;
         } else {
-            tempStrCondition = ` or ${diagnosisReturn[i].condition}`;
-            tempStrAdvice = ` or ${diagnosisReturn[i].advice}`;
-            tempStrDescription = ` or ${diagnosisReturn[i].description}`;
+            tempStrCondition = ` or ${diagnosisReturn[i].illness.illnessName}`;
+            tempStrAdvice = ` or ${diagnosisReturn[i].illness.illnessAdvice}`;
+            tempStrDescription = ` or ${diagnosisReturn[i].illness.illnessDescription}`;
         }
 
         diagnosis += tempStrCondition;
@@ -40,8 +41,8 @@
     export let data: LayoutData;
 
     onMount(async () => {
-        data.symptoms.forEach((val: string) => {
-            symptomsToChoose.push({ value: `${val}1`, name: `${val}` });
+        data.symptoms.forEach((val) => {
+            symptomsToChoose.push({ value: `${val.symptomName}1`, name: `${val.symptomName}` });
         });
     });
 
@@ -49,6 +50,8 @@
         const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
             method: "POST",
         });
+
+        console.log(res.json())
 
         diagnosisReturn = await res.json();
     };

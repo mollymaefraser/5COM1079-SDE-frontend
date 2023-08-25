@@ -1,8 +1,8 @@
 export type LocationLoad = {
     longitude: number,
     latitude: number,
-    name: string,
+    nameOfFacility: string,
     address: string,
-    email: string,
+    emailAddress: string,
     telephone: number
   }

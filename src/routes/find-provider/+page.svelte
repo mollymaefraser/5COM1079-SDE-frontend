@@ -53,9 +53,9 @@
             {#each data.locations as location}
                 <div class="col-sm">
                     <Card>
-                        <p><strong>{location.name}</strong></p>
+                        <p><strong>{location.nameOfFacility}</strong></p>
                         <p>{location.address}</p>
-                        <p>{location.email}</p>
+                        <p>{location.emailAddress}</p>
                         <p>{location.telephone}</p>
                     </Card>
                 </div>
