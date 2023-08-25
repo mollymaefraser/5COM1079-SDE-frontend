@@ -42,23 +42,32 @@
 
     onMount(async () => {
         data.symptoms.forEach((val) => {
-            symptomsToChoose.push({ value: `${val.symptomName}1`, name: `${val.symptomName}` });
+            symptomsToChoose.push({
+                value: `${val.symptomName}`,
+                name: `${val.symptomName}`,
+            });
         });
     });
 
     const submitSymptoms = async () => {
+        let formData = new FormData()
+        for(let i=0; i<symptomsChosen.length; i++){
+            formData.append("symptoms", symptomsChosen[i])
+        }
         const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
-            method: "POST",
+            body: formData,
+            mode: "no-cors",
+            method: "POST"
         });
 
-        console.log(res.json())
+        console.log(res)
 
         diagnosisReturn = await res.json();
     };
 
     const fireRedirect = async () => {
-        if(browser){
-            goto("/login")
+        if (browser) {
+            goto("/login");
         }
     };
 </script>
@@ -92,7 +101,12 @@
     </div>
 
     <div class="symptoms">
-        <MultiSelect dropdownClass="!dark:bg-gray-50 hover:text-black bg-gray-50" class="!dark:bg-gray-50 bg-gray-50 hover:text-black" items={symptomsToChoose} bind:value={symptomsChosen} />
+        <MultiSelect
+            dropdownClass="!dark:bg-gray-50 hover:text-black bg-gray-50"
+            class="!dark:bg-gray-50 bg-gray-50 hover:text-black"
+            items={symptomsToChoose}
+            bind:value={symptomsChosen}
+        />
     </div>
 
     <div class="submitter">
@@ -112,11 +126,11 @@
         padding: 70px;
     }
 
-    .symptoms{
+    .symptoms {
         padding-left: 10%;
         padding-right: 10%;
     }
-    
+
     .submitter {
         padding-top: 40px;
         padding-bottom: 100px;
