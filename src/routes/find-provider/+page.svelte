@@ -24,22 +24,24 @@
 </div>
 
 {#if $loggedInStore == true}
-    <div class="provider-header">
-        <Heading
-            tag="h1"
-            class="mb-4"
-            customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
-            ><Span gradient>Find a Provider</Span></Heading
-        >
-    </div>
+    <div class="headers">
+        <div class="provider-header">
+            <Heading
+                tag="h1"
+                class="mb-4"
+                customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
+                ><Span gradient>Find a Provider</Span></Heading
+            >
+        </div>
 
-    <div class="details-header">
-        <Heading
-            tag="h1"
-            class="mb-4"
-            customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
-            ><Span gradient>Location Details</Span></Heading
-        >
+        <div class="details-header">
+            <Heading
+                tag="h1"
+                class="mb-4"
+                customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl"
+                ><Span gradient>Location Details</Span></Heading
+            >
+        </div>
     </div>
 
     <div class="map">
@@ -74,6 +76,10 @@
         width: 50%;
         padding-bottom: 100px;
     }
+    .headers {
+        display: flex;
+        flex-direction: row;
+    }
     .footer {
         position: relative;
         bottom: 0;
@@ -91,10 +97,11 @@
     }
     .details-header {
         padding-top: 50px;
-        float: right;
+        position: absolute;
+        left: 50%;
+        transform: translateX(5%);
     }
     .provider-header {
         padding-top: 50px;
-        float: left;
     }
 </style>
