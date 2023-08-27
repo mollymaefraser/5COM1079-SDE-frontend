@@ -1,6 +1,4 @@
 {@html '<!--I have created an about us page-->'}
-
-<body>
     <!--about us top section-->
     <section class="about" id="about">
         <div class="image">
@@ -148,7 +146,6 @@ We take pride in our patient-oriented approach, offering a wide range of service
         </div>
 
     </section>
-</body>
 
 
 {@html '<!--setting properties for the body, container, -->'}
@@ -159,7 +156,6 @@ We take pride in our patient-oriented approach, offering a wide range of service
         
         box-sizing: border-box;
         text-decoration: none;
-        text-transform: capitalize;
         transition: all .2s ease-out;
     }
     /*select and sets tthe background colour of every second element/section to grey*/
