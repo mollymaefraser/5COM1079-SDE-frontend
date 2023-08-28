@@ -10,6 +10,8 @@
 
     export let data: LayoutData; // undefined somehow
 
+    let cols = 3;
+
     const fireRedirect = async () => {
         if (browser) {
             goto("/login");
@@ -50,15 +52,18 @@
 
     <div class="locations">
         <div class="row">
-            {#each data.locations as location}
-                <div class="col-sm">
-                    <Card>
-                        <p><strong>{location.nameOfFacility}</strong></p>
-                        <p>{location.address}</p>
-                        <p>{location.emailAddress}</p>
-                        <p>{location.telephone}</p>
-                    </Card>
-                </div>
+            {#each data.locations as location, i}
+                    {#if i % cols === 0}
+                        <div class="row">
+                            {#each Array(cols) as _, j}
+                                {#if data.locations[(i / cols) * cols + j]}
+                                    <div class="col">
+                                        {data.locations[(i / cols) * cols + j]}
+                                    </div>
+                                {/if}
+                            {/each}
+                        </div>
+                    {/if}
             {/each}
         </div>
     </div>
@@ -92,8 +97,12 @@
         width: 50%;
         padding-left: 30px;
     }
+    .card-group {
+        display: flex;
+    }
     .row {
-        display: inline-flex;
+        display: grid;
+        grid-column: 4;
     }
     .details-header {
         padding-top: 50px;

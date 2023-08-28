@@ -8,35 +8,43 @@
     var hasFailed: boolean;
 
     type LoginResponse = {
-        isAdmin: boolean
-    }
+        userID: number,
+        userFirstName: string,
+        userLastName: string,
+        userEmail: string,
+        isUserAdmin: boolean
+    };
 
     var email: String;
     var password: String;
     const submit = async () => {
         const res = await fetch(`${PUBLIC_LOGIN_URL}`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                "accept": "text/plain",
+                "Access-Control-Allow-Origin": "*",
+            },
             body: JSON.stringify({
-                email: { email },
-                password: { password },
+                email: email,
+                password: password,
             }),
         });
 
-        let resp: LoginResponse[] = await res.json();
+        let resp: LoginResponse = await res.json();
 
-        if (resp[0].isAdmin == true) {
+        if (res.status !== 200) {
+            hasFailed = true;
+            return;
+        } else if (resp.isUserAdmin === true) {
             hasFailed = false;
             $isAdmin = true;
             $isLoggedIn = false;
             goto("/");
-        }
-
-        if (res.status == 200) {
+        } else {
             hasFailed = false;
             $isLoggedIn = true;
             goto("/");
-        } else {
-            hasFailed = true;
         }
     };
 </script>

@@ -1,29 +1,39 @@
 {@html '<!--I have created an input for the signup form with placeholders for both name, email, password and confirm password-->'}
 <script lang="ts">
     import isLoggedIn from "$lib/types/loggedInStore.js";
-    import { PUBLIC_LOGIN_URL, PUBLIC_SIGNUP_URL } from '$env/static/public'
+    import { PUBLIC_SIGNUP_URL } from '$env/static/public'
     import { goto } from "$app/navigation";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
 
     var hasFailed: boolean;
 
-    var email: String
-    var password: String
-    var firstName: String
-    var lastName: String
+    var email: string
+    var password1: string
+    var password2: string
+    var firstName: string
+    var lastName: string
 
     const submit = async () => {
+        if(password1 !== password2){
+            hasFailed = true
+        }
+        
         const res = await fetch(`${PUBLIC_SIGNUP_URL}`, {
             method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                "accept": "text/plain",
+                "Access-Control-Allow-Origin": "*",
+            },
             body: JSON.stringify({
-                firstName: {firstName},
-                lastName: {lastName},
-                email: {email},
-                password: {password}
+                userFirstName: firstName,
+                userLastName: lastName,
+                userEmail: email,
+                userPassword: password1
             })
         })
 
-        if (res.status == 200){
+        if (res.status === 201){
             hasFailed = false;
             $isLoggedIn = true
             goto('/')
@@ -39,30 +49,30 @@
     <div class="signupform">
 
         {#if hasFailed}
-        <ErrorBanner ErrorMessage="Sign Up has failed. Please try again. Contact support if the issue persists."/>
+        <ErrorBanner ErrorMessage="Sign Up has failed. This could be because you are already signed up, or your passwords didn't match. Please try again. Contact support if the issue persists."/>
         {/if}
 
         <form class="form">
             <h1 class="signup__title">Sign up</h1>
 
             <div class="signup_message">
-                <input type="text" class="signup__input" style="background-color: white" placeholder="First Name" required> <!--input description for name -->
+                <input type="text" class="signup__input" style="background-color: white" bind:value={firstName} placeholder="First Name" required> <!--input description for name -->
             </div> 
             
             <div class="signup_message">
-                <input type="text" class="signup__input" style="background-color: white" placeholder="Last Name" required> <!--input description for name -->
+                <input type="text" class="signup__input" style="background-color: white" bind:value={lastName} placeholder="Last Name" required> <!--input description for name -->
             </div>
             
             <div class="signup_message">
-                <input type="text" class="signup__input" style="background-color: white" placeholder="Email" required> <!--input description for email -->
+                <input type="text" class="signup__input" style="background-color: white" bind:value={email} placeholder="Email" required> <!--input description for email -->
             </div>
 
             <div class="signup_message">
-                <input type="password" class="login__input" style="background-color: white" placeholder="Password" required> <!--input description for password -->
+                <input type="password" class="login__input" style="background-color: white" bind:value={password1} placeholder="Password" required> <!--input description for password -->
             </div>
 
             <div class="signup_message">
-                <input type="password" class="login__input" style="background-color: white" placeholder="Confirm Password" required> <!--input description to confirm password -->
+                <input type="password" class="login__input" style="background-color: white" bind:value={password2} placeholder="Confirm Password" required> <!--input description to confirm password -->
             </div>
 
             <button class="signup__button" type="submit" on:click|preventDefault={() => {submit()}}>Sign up</button> <!--signup button with type submit-->
