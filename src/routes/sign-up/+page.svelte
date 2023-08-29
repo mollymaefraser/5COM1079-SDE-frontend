@@ -44,7 +44,7 @@
             if (response.status !== 201) {
                 return response.text().then((data) => (errorMessage = data));
             } else {
-                goto("/");
+                goto("/login");
             }
         });
     };
