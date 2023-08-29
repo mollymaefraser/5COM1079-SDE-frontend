@@ -2,8 +2,7 @@
     import { browser } from "$app/environment";
     import { goto } from "$app/navigation";
     import { PUBLIC_LOCATION_ADD_URL } from "$env/static/public";
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
-    import isAdminStore from "$lib/types/isAdminStore";
+    import user from "$lib/types/user";
     import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
 
@@ -57,7 +56,7 @@
 
 <br />
 
-{#if $isAdminStore == true}
+{#if $user.isUserAdmin == true}
     <div class="text-center">
         <Heading
             tag="h1"

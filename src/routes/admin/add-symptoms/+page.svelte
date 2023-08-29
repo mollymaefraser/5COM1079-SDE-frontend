@@ -2,7 +2,6 @@
     import { browser } from "$app/environment";
     import { goto } from "$app/navigation";
     import { PUBLIC_SYMPTOM_ADD_URL } from "$env/static/public";
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import isAdminStore from "$lib/types/isAdminStore";
     import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";

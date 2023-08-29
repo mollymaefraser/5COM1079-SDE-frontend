@@ -1,8 +1,8 @@
 <script lang="ts">
-    import isLoggedIn from "$lib/types/loggedInStore.js";
     import { PUBLIC_SIGNUP_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
+    import { Toast } from "flowbite-svelte";
+    import { Icon } from "flowbite-svelte-icons";
 
     let errorMessage = "";
 
@@ -44,7 +44,6 @@
             if (response.status !== 201) {
                 return response.text().then((data) => (errorMessage = data));
             } else {
-                $isLoggedIn = true;
                 goto("/");
             }
         });
@@ -56,7 +55,13 @@
 <body>
     <div class="signupform">
         {#if errorMessage !== ""}
-            <ErrorBanner ErrorMessage={errorMessage} />
+        <Toast>
+            <svelte:fragment slot="icon">
+                <Icon name="close-circle-solid" class="w-5 h-5" />
+                <span class="sr-only">Error icon</span>
+            </svelte:fragment>
+            <p>{errorMessage}</p>
+        </Toast>
         {/if}
 
         <form class="form">

@@ -2,14 +2,13 @@
     import { MultiSelect, Button, Heading, P, Span, Alert, Card, Badge, Toast } from "flowbite-svelte";
     import { Icon } from 'flowbite-svelte-icons';
     import { onMount } from "svelte";
-    import { PUBLIC_SYMPTOM_SEND_URL } from "$env/static/public";
+    import { PUBLIC_SYMPTOM_LOAD_URL, PUBLIC_SYMPTOM_SEND_URL } from "$env/static/public";
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import type { LayoutData } from "../$types";
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
-    import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import type { PredictionReturn } from "$lib/types/predictionReturn";
+    import user from "$lib/types/user";
 
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
@@ -18,15 +17,6 @@
     let errorMessage: string = "";
 
     export let data: LayoutData;
-
-    onMount(async () => {
-        data.symptoms.forEach((val) => {
-            symptomsToChoose.push({
-                value: `${val.symptomName}`,
-                name: `${val.symptomName}`,
-            });
-        });
-    });
 
     const submitSymptoms = async () => {
         const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
@@ -56,16 +46,35 @@
             goto("/login");
         }
     };
+
+    onMount (async () => {
+        const symp = await fetch(`${PUBLIC_SYMPTOM_LOAD_URL}`, {
+            method: 'GET'
+        });
+
+        if (symp.status != 200){
+            errorMessage = "Failed to load symptom options. Please refresh and try again. If the problem persists, contact support."
+        }
+
+        let symptoms = await symp.json();
+
+        symptoms.forEach((val: any) => {
+            symptomsToChoose.push({
+                value: `${val.symptomName}`,
+                name: `${val.symptomName}`,
+            });
+        });
+    })
 </script>
 
 <div class="error-message">
-    {#if data.errorMessages.symp}
+    {#if errorMessage !== ""}
     <Toast>
         <svelte:fragment slot="icon">
             <Icon name="close-circle-solid" class="w-5 h-5" />
             <span class="sr-only">Error icon</span>
         </svelte:fragment>
-        <p>{data.errorMessages.symp}</p>
+        <p>{errorMessage}</p>
     </Toast>
     {/if}
 
@@ -83,7 +92,7 @@
 <br />
 
 <div class="h-screen grid gap-2 auto-rows-max place-items-center justify-stretch content-around">
-{#if $loggedInStore == true}
+{#if $user.userFirstName !== ""}
 
         <div>
         <Heading

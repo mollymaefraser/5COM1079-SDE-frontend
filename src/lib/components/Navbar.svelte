@@ -1,18 +1,14 @@
 <script lang="ts">
-  import {
-    Navbar,
-    NavBrand,
-    NavLi,
-    NavUl,
-  } from "flowbite-svelte";
+  import { Avatar, Dropdown, DropdownHeader, DropdownItem, Navbar, NavBrand, NavLi, NavUl } from "flowbite-svelte";
 
-  import isLoggedIn from "$lib/types/loggedInStore.js";
-  import isAdmin from "$lib/types/isAdminStore.js";
+  import user from "$lib/types/user.js";
 
   function logout() {
-    $isAdmin = false;
-    $isLoggedIn = false;
+    $user.isUserAdmin = false
+    $user.userFirstName = ""
+    $user.userID = 0
   }
+
 </script>
 
 <Navbar let:hidden let:toggle>
@@ -27,16 +23,42 @@
   {@html "<!--The above serves as branding for the navbar, including our logo-->"}
   <NavUl {hidden}>
     <NavLi href="/" active={true}>Home</NavLi>
-    {#if $isAdmin == true}
+    {#if $user.isUserAdmin == true}
       <NavLi on:click={logout} href="/">Log Out</NavLi>
       <NavLi href="/admin/add-symptoms">Add Symptoms</NavLi>
       <NavLi href="/admin/add-provider">Add Health Provider</NavLi>
       <NavLi href="/admin/add-illness">Add Illness</NavLi>
       <!-- <NavLi href="/admin/update-illness">Update Illness</NavLi> -->
-    {:else if $isLoggedIn == true}
+      <div class="profile">
+        <Avatar
+          id="user-drop"
+          src="/defaultAvatar.png"
+          class="cursor-pointer"
+        />
+        <Dropdown triggeredBy="#user-drop">
+          <DropdownHeader>
+            <span class="block text-sm">{$user.userFirstName}</span>
+          </DropdownHeader>
+          <DropdownItem href="/change-password">Change Password</DropdownItem>
+        </Dropdown>
+      </div>
+    {:else if $user.userFirstName !== ""}
       <NavLi on:click={logout} href="/">Log Out</NavLi>
       <NavLi href="/symptom-checker">Symptom Checker</NavLi>
       <NavLi href="/find-provider">Find Health Provider</NavLi>
+      <div class="profile">
+        <Avatar
+          id="user-drop"
+          src="/defaultAvatar.png"
+          class="cursor-pointer"
+        />
+        <Dropdown triggeredBy="#user-drop">
+          <DropdownHeader>
+            <span class="block text-sm">{$user.userFirstName}</span>
+          </DropdownHeader>
+          <DropdownItem href="/change-password">Change Password</DropdownItem>
+        </Dropdown>
+      </div>
       {@html "<!--The above are the options for a user who is logged in-->"}
     {:else}
       <NavLi href="/login">Login</NavLi>
@@ -46,3 +68,8 @@
   </NavUl>
 </Navbar>
 
+<style>
+  .profile {
+    align-items: right;
+  }
+</style>

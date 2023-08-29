@@ -1,6 +1,5 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import {
         Label,
         Input,
@@ -12,12 +11,11 @@
         Toast,
     } from "flowbite-svelte";
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
-    import type { LayoutData } from "../../$types";
     import { onMount } from "svelte";
-    import { PUBLIC_ILLNESS_ADD_URL } from "$env/static/public";
-    import isAdminStore from "$lib/types/isAdminStore";
+    import { PUBLIC_ILLNESS_ADD_URL, PUBLIC_SYMPTOM_LOAD_URL } from "$env/static/public";
     import { browser } from "$app/environment";
     import { Icon } from "flowbite-svelte-icons";
+    import user from "$lib/types/user";
 
     let name: String;
     let advice: String;
@@ -25,13 +23,25 @@
     let errorMessage: String | Error;
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
-    export let data: LayoutData;
 
-    onMount(async () => {
-        data.symptoms.forEach((val) => {
-            symptomsToChoose.push({ value: `${val.symptomName}`, name: `${val.symptomName}` });
+    onMount (async () => {
+        const symp = await fetch(`${PUBLIC_SYMPTOM_LOAD_URL}`, {
+            method: 'GET'
         });
-    });
+
+        if (symp.status != 200){
+            errorMessage = "Failed to load symptom options. Please refresh and try again. If the problem persists, contact support."
+        }
+
+        let symptoms = await symp.json();
+
+        symptoms.forEach((val: any) => {
+            symptomsToChoose.push({
+                value: `${val.symptomName}`,
+                name: `${val.symptomName}`,
+            });
+        });
+    })
 
     const submitIllness = async () => {
         const res = await fetch(`${PUBLIC_ILLNESS_ADD_URL}`, {
@@ -73,7 +83,7 @@
 
 <br />
 
-{#if $isAdminStore == true}
+{#if $user.isUserAdmin == true}
     <div class="text-center">
         <Heading
             tag="h1"

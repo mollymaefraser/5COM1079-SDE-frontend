@@ -1,37 +1,52 @@
 <script lang="ts">
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import Map from "$lib/components/Map.svelte";
     import { Card, Heading, Span, Toast } from "flowbite-svelte";
-    import type { LayoutData } from "../$types";
-    import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
     import Col from "$lib/components/Col.svelte";
     import { Icon } from "flowbite-svelte-icons";
+    import { PUBLIC_MARKER_LOAD_URL } from "$env/static/public";
+    import { onMount } from "svelte";
+    import type { LocationLoad } from "$lib/types/LocationLoad";
+    import user from "$lib/types/user";
 
-    export let data: LayoutData;
+    let locations: LocationLoad[]
+
+    let errorMessage: string = "";
 
     const fireRedirect = async () => {
         if (browser) {
             goto("/login");
         }
     };
+
+    onMount (async () =>{
+        const mark = await fetch(`${PUBLIC_MARKER_LOAD_URL}`, {
+        method: 'GET'
+        });
+
+        locations = await mark.json();
+
+        if (mark.status != 200){
+            errorMessage = "Failed to load locations. Please refresh and try again. If the problem persists, contact support."
+        }
+    })
 </script>
 
 <div class="error-banner">
-    {#if data.errorMessages.mark}
+    {#if errorMessage !== ""}
         <Toast>
             <svelte:fragment slot="icon">
                 <Icon name="close-circle-solid" class="w-5 h-5" />
                 <span class="sr-only">Error icon</span>
             </svelte:fragment>
-            <p>{data.errorMessages.mark}</p>
+            <p>{errorMessage}</p>
         </Toast>
     {/if}
 </div>
 
-{#if $loggedInStore == true}
+{#if $user.userFirstName !== ""}
     <div class="headers">
         <div class="provider-header">
             <Heading
@@ -53,11 +68,11 @@
     </div>
 
     <div class="map">
-        <Map locations={data.locations} />
+        <Map locations={locations} />
     </div>
 
     <div class="locations">
-        {#each data.locations as location}
+        {#each locations as location}
             <Col xs={16} md={8} lg={4}>
                 <Card>
                     <h2>{location.nameOfFacility}</h2>
