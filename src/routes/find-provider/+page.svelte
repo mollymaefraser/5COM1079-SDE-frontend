@@ -7,10 +7,9 @@
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
+    import Col from "$lib/components/Col.svelte";
 
     export let data: LayoutData; 
-
-    let cols = 3;
 
     const fireRedirect = async () => {
         if (browser) {
@@ -51,21 +50,16 @@
     </div>
 
     <div class="locations">
-        <div class="row">
-            {#each data.locations as location, i}
-                    {#if i % cols === 0}
-                        <div class="row">
-                            {#each Array(cols) as _, j}
-                                {#if data.locations[(i / cols) * cols + j]}
-                                    <div class="col">
-                                        {data.locations[(i / cols) * cols + j]}
-                                    </div>
-                                {/if}
-                            {/each}
-                        </div>
-                    {/if}
-            {/each}
-        </div>
+       {#each data.locations as location}
+            <Col xs={16} md={8} lg={4}>
+                <Card>
+                    <h2>{location.nameOfFacility}</h2>
+                    <p>{location.address}</p>
+                    <p>{location.emailAddress}</p>
+                    <p>{location.telephone}</p>
+                </Card>
+            </Col>
+       {/each}
     </div>
 {:else}
     <p hidden>{fireRedirect()}</p>
