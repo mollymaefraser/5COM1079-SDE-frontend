@@ -9,6 +9,7 @@
         Span,
         P,
         MultiSelect,
+        Toast,
     } from "flowbite-svelte";
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import type { LayoutData } from "../../$types";
@@ -16,6 +17,7 @@
     import { PUBLIC_ILLNESS_ADD_URL } from "$env/static/public";
     import isAdminStore from "$lib/types/isAdminStore";
     import { browser } from "$app/environment";
+    import { Icon } from "flowbite-svelte-icons";
 
     let name: String;
     let advice: String;
@@ -26,8 +28,8 @@
     export let data: LayoutData;
 
     onMount(async () => {
-        data.symptoms.forEach((val: string) => {
-            symptomsToChoose.push({ value: `${val}1`, name: `${val}` });
+        data.symptoms.forEach((val) => {
+            symptomsToChoose.push({ value: `${val.symptomName}`, name: `${val.symptomName}` });
         });
     });
 
@@ -42,7 +44,7 @@
             }),
         });
 
-        if (res.status != 200) {
+        if (res.status != 201) {
             errorMessage =
                 "Failed to add Illness. Please refresh and try again. If the problem persists, contact support.";
         }
@@ -59,9 +61,13 @@
 
 <div class="error-banner">
     {#if errorMessage}
-        <ErrorBanner
-            ErrorMessage="Illness add has failed. Please try again. Contact support if the issue persists."
-        />
+    <Toast>
+        <svelte:fragment slot="icon">
+            <Icon name="close-circle-solid" class="w-5 h-5" />
+            <span class="sr-only">Error icon</span>
+        </svelte:fragment>
+        <p>{errorMessage}</p>
+    </Toast>
     {/if}
 </div>
 

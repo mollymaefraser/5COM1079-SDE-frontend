@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { MultiSelect, Button, Heading, P, Span, Alert, Card, Badge } from "flowbite-svelte";
+    import { MultiSelect, Button, Heading, P, Span, Alert, Card, Badge, Toast } from "flowbite-svelte";
     import { Icon } from 'flowbite-svelte-icons';
     import { onMount } from "svelte";
     import { PUBLIC_SYMPTOM_SEND_URL } from "$env/static/public";
@@ -60,11 +60,23 @@
 
 <div class="error-message">
     {#if data.errorMessages.symp}
-        <ErrorBanner ErrorMessage={data.errorMessages.symp} />
+    <Toast>
+        <svelte:fragment slot="icon">
+            <Icon name="close-circle-solid" class="w-5 h-5" />
+            <span class="sr-only">Error icon</span>
+        </svelte:fragment>
+        <p>{data.errorMessages.symp}</p>
+    </Toast>
     {/if}
 
     {#if errorMessage !== ""}
-        <ErrorBanner ErrorMessage={errorMessage} />
+    <Toast>
+        <svelte:fragment slot="icon">
+            <Icon name="close-circle-solid" class="w-5 h-5" />
+            <span class="sr-only">Error icon</span>
+        </svelte:fragment>
+        <p>{errorMessage}</p>
+    </Toast>
     {/if}
 </div>
 

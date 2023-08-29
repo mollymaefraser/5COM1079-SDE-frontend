@@ -1,15 +1,16 @@
 <script lang="ts">
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import Map from "$lib/components/Map.svelte";
-    import { Card, Heading, Span } from "flowbite-svelte";
+    import { Card, Heading, Span, Toast } from "flowbite-svelte";
     import type { LayoutData } from "../$types";
     import loggedInStore from "$lib/types/loggedInStore";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
     import Col from "$lib/components/Col.svelte";
+    import { Icon } from "flowbite-svelte-icons";
 
-    export let data: LayoutData; 
+    export let data: LayoutData;
 
     const fireRedirect = async () => {
         if (browser) {
@@ -20,7 +21,13 @@
 
 <div class="error-banner">
     {#if data.errorMessages.mark}
-        <ErrorBanner ErrorMessage={data.errorMessages.mark} />
+        <Toast>
+            <svelte:fragment slot="icon">
+                <Icon name="close-circle-solid" class="w-5 h-5" />
+                <span class="sr-only">Error icon</span>
+            </svelte:fragment>
+            <p>{data.errorMessages.mark}</p>
+        </Toast>
     {/if}
 </div>
 
@@ -50,7 +57,7 @@
     </div>
 
     <div class="locations">
-       {#each data.locations as location}
+        {#each data.locations as location}
             <Col xs={16} md={8} lg={4}>
                 <Card>
                     <h2>{location.nameOfFacility}</h2>
@@ -59,7 +66,7 @@
                     <p>{location.telephone}</p>
                 </Card>
             </Col>
-       {/each}
+        {/each}
     </div>
 {:else}
     <p hidden>{fireRedirect()}</p>
@@ -91,13 +98,7 @@
         width: 50%;
         padding-left: 30px;
     }
-    .card-group {
-        display: flex;
-    }
-    .row {
-        display: grid;
-        grid-column: 4;
-    }
+
     .details-header {
         padding-top: 50px;
         position: absolute;

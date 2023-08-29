@@ -4,7 +4,8 @@
     import { PUBLIC_SYMPTOM_ADD_URL } from "$env/static/public";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
     import isAdminStore from "$lib/types/isAdminStore";
-    import { Label, Input, Button, Heading, Span, P } from "flowbite-svelte";
+    import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
+    import { Icon } from "flowbite-svelte-icons";
     let symptom: String;
     let errorMessage: String | Error;
 
@@ -14,26 +15,28 @@
             body: JSON.stringify(symptom),
         });
 
-        if (res.status != 200) {
+        if (res.status != 201) {
             errorMessage =
-                "Failed to add symptom. Please refresh and try again. If the problem persists, contact support.";
+                "Failed to add symptom. Please try again. If the problem persists, contact support.";
         }
-
-        goto("/");
     };
 
     const fireRedirect = async () => {
-        if(browser){
-            goto("/")
+        if (browser) {
+            goto("/");
         }
     };
 </script>
 
 <div class="error-banner">
     {#if errorMessage}
-        <ErrorBanner
-            ErrorMessage="Symptom add has failed. Please try again. Contact support if the issue persists."
-        />
+        <Toast>
+            <svelte:fragment slot="icon">
+                <Icon name="close-circle-solid" class="w-5 h-5" />
+                <span class="sr-only">Error icon</span>
+            </svelte:fragment>
+            <p>{errorMessage}</p>
+        </Toast>
     {/if}
 </div>
 
