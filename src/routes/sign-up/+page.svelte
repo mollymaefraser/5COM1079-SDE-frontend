@@ -4,8 +4,6 @@
     import { goto } from "$app/navigation";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
 
-    var hasFailed: boolean;
-
     let errorMessage = "";
 
     var regexp = new RegExp(
@@ -20,7 +18,11 @@
 
     const submit = async () => {
         if (password1 !== password2) {
-            hasFailed = true;
+            errorMessage="Passwords are not the same. Please try again."
+        }
+
+        if(!regexp.test(email)){
+            errorMessage="Your email is invalid. Please try again."
         }
 
         const res = await fetch(`${PUBLIC_SIGNUP_URL}`, {
