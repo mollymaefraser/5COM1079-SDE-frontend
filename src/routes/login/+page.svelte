@@ -5,7 +5,7 @@
     import { goto } from "$app/navigation";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
 
-    var hasFailed: boolean;
+    let errorMessage = ""
 
     type LoginResponse = {
         userID: number,
@@ -29,20 +29,18 @@
                 email: email,
                 password: password,
             }),
-        });
+        })
 
         let resp: LoginResponse = await res.json();
 
         if (res.status !== 200) {
-            hasFailed = true;
+            errorMessage = "Login failed. Please try again"
             return;
         } else if (resp.isUserAdmin === true) {
-            hasFailed = false;
             $isAdmin = true;
             $isLoggedIn = false;
             goto("/");
         } else {
-            hasFailed = false;
             $isLoggedIn = true;
             goto("/");
         }
@@ -53,9 +51,9 @@
 
 <body>
     <div class="container">
-        {#if hasFailed}
+        {#if errorMessage !== ""}
             <ErrorBanner
-                ErrorMessage="Login has failed. Please try again. Contact support if the issue persists."
+                ErrorMessage={errorMessage}
             />
         {/if}
         <form class="form" id="login">

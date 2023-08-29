@@ -3,7 +3,6 @@
     import { Icon } from 'flowbite-svelte-icons';
     import { onMount } from "svelte";
     import { PUBLIC_SYMPTOM_SEND_URL } from "$env/static/public";
-    import type { DiagnosisReturn } from "$lib/types/diagnosisReturn";
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import type { LayoutData } from "../$types";
     import ErrorBanner from "$lib/components/ErrorBanner.svelte";
@@ -11,7 +10,6 @@
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import type { PredictionReturn } from "$lib/types/predictionReturn";
-  import { Result } from "postcss";
 
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
@@ -31,10 +29,6 @@
     });
 
     const submitSymptoms = async () => {
-        // let formData = new FormData()
-        // for(let i=0; i<symptomsChosen.length; i++){
-        //     formData.append("symptoms", symptomsChosen[i])
-        // }
         const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
             method: "POST",
             headers: {
@@ -67,6 +61,10 @@
 <div class="error-message">
     {#if data.errorMessages.symp}
         <ErrorBanner ErrorMessage={data.errorMessages.symp} />
+    {/if}
+
+    {#if errorMessage !== ""}
+        <ErrorBanner ErrorMessage={errorMessage} />
     {/if}
 </div>
 
