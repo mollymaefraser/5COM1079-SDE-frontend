@@ -7,7 +7,7 @@
     let errorMessage = "";
 
     var regexp = new RegExp(
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
     );
 
     var email: string;
@@ -19,10 +19,12 @@
     const submit = async () => {
         if (password1 !== password2) {
             errorMessage="Passwords are not the same. Please try again."
+            return
         }
 
         if(!regexp.test(email)){
             errorMessage="Your email is invalid. Please try again."
+            return
         }
 
         const res = await fetch(`${PUBLIC_SIGNUP_URL}`, {

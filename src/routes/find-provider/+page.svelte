@@ -8,7 +8,7 @@
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
 
-    export let data: LayoutData; // undefined somehow
+    export let data: LayoutData; 
 
     let cols = 3;
 
