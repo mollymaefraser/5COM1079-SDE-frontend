@@ -16,8 +16,6 @@
 
     let errorMessage: string = "";
 
-    export let data: LayoutData;
-
     const submitSymptoms = async () => {
         const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
             method: "POST",

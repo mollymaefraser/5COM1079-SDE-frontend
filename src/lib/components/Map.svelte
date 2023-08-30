@@ -2,12 +2,12 @@
   import { onMount } from "svelte";
   import { Map, Marker, NavigationControl } from "maplibre-gl";
   import "maplibre-gl/dist/maplibre-gl.css";
-  import type { LocationLoad } from "$lib/types/LocationLoad";
+    import type { LocationLoad } from "$lib/types/LocationLoad";
 
   let map: Map;
   let mapContainer: string | HTMLElement;
 
-  export let locations: LocationLoad[] = [];
+  export let locations: LocationLoad[]
 
   const apiKey = "U6Q44BrLCIKE3mhBEMv9";
 
@@ -30,13 +30,15 @@
       zoom: zoom,
     });
 
+    console.log(locations)
+
     map.addControl(new NavigationControl(), "top-right");
 
     new Marker({ color: "#00FF00" })
         .setLngLat([longitude, latitude])
         .addTo(map);
 
-    locations.forEach((element: LocationLoad) => {
+    locations.forEach((element: {longitude: number, latitude: number}) => {
       new Marker({ color: "#FF0000" })
         .setLngLat([element.longitude, element.latitude])
         .addTo(map);

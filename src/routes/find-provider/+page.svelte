@@ -4,16 +4,17 @@
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
-    import Col from "$lib/components/Col.svelte";
     import { Icon } from "flowbite-svelte-icons";
     import { PUBLIC_MARKER_LOAD_URL } from "$env/static/public";
     import { onMount } from "svelte";
     import type { LocationLoad } from "$lib/types/LocationLoad";
     import user from "$lib/types/user";
 
-    let locations: LocationLoad[]
+    let locations: LocationLoad[] = [];
 
     let errorMessage: string = "";
+
+    let hovered;
 
     const fireRedirect = async () => {
         if (browser) {
@@ -21,17 +22,18 @@
         }
     };
 
-    onMount (async () =>{
+    onMount(async () => {
         const mark = await fetch(`${PUBLIC_MARKER_LOAD_URL}`, {
-        method: 'GET'
+            method: "GET",
         });
 
         locations = await mark.json();
 
-        if (mark.status != 200){
-            errorMessage = "Failed to load locations. Please refresh and try again. If the problem persists, contact support."
+        if (mark.status != 200) {
+            errorMessage =
+                "Failed to load locations. Please refresh and try again. If the problem persists, contact support.";
         }
-    })
+    });
 </script>
 
 <div class="error-banner">
@@ -67,24 +69,42 @@
         </div>
     </div>
 
-    <div class="map">
-        <Map locations={locations} />
-    </div>
+    {#if locations.length > 0}
+        <div class="map">
+            <Map {locations} />
+        </div>
+    {/if}
 
     <div class="locations">
-        {#each locations as location}
-            <Col xs={16} md={8} lg={4}>
-                <Card>
-                    <h2>{location.nameOfFacility}</h2>
-                    <p>{location.address}</p>
-                    <p>{location.emailAddress}</p>
-                    <p>{location.telephone}</p>
-                    {#each location.offeredServices as service}
-                        <Badge rounded border color="green">{service.serviceName}</Badge>
-                    {/each}
+        {#if locations.length != 0}
+            {#each { length: locations.length } as _, i}
+                <Card size="xl" class="mb-6">
+                    <Heading tag="h2"
+                        >Location Name: {locations[i].nameOfFacility}</Heading
+                    >
+                    <p><b>Location Address:</b> {locations[i].address}</p>
+                    <p>
+                        <b>Location Email Address:</b>
+                        {locations[i].emailAddress}
+                    </p>
+                    <p><b>Location Telephone:</b> {locations[i].telephone}</p>
+                    <p>
+                        <b>Services Offered:</b>
+                        {#each locations[i].offeredServices as service}
+                            <Badge
+                                title={service.serviceDescription}
+                                rounded
+                                border
+                                color="green"
+                            >
+                                    {service.serviceName} : {service.serviceDescription}
+                            </Badge>
+
+                        {/each}
+                    </p>
                 </Card>
-            </Col>
-        {/each}
+            {/each}
+        {/if}
     </div>
 {:else}
     <p hidden>{fireRedirect()}</p>
@@ -107,7 +127,7 @@
     .footer {
         position: relative;
         bottom: 0;
-        padding-top: 1000px;
+        padding-top: 2000px;
         width: 100%;
         height: 60px; /* Height of the footer */
     }
