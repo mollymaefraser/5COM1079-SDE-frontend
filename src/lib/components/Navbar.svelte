@@ -38,7 +38,7 @@
         />
         <Dropdown triggeredBy="#user-drop">
           <DropdownHeader>
-            <span class="block text-sm">{$user.userFirstName}</span>
+            <span class="block text-sm">{$user.userFirstName} {$user.userLastName}</span>
           </DropdownHeader>
           <DropdownItem href="/change-password">Change Password</DropdownItem>
         </Dropdown>
@@ -55,7 +55,7 @@
         />
         <Dropdown triggeredBy="#user-drop">
           <DropdownHeader>
-            <span class="block text-sm">{$user.userFirstName}</span>
+            <span class="block text-sm">{$user.userFirstName} {$user.userLastName}</span>
           </DropdownHeader>
           <DropdownItem href="/change-password">Change Password</DropdownItem>
         </Dropdown>
