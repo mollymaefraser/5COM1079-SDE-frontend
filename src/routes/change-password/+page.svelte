@@ -21,15 +21,15 @@
 
     const submit = async () => {
         const res = await fetch(`${PUBLIC_USER_URL}/UpdatePassword`, {
-            method: "POST",
+            method: "PUT",
             headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                "Content-Type": "application/json",
                 accept: "text/plain",
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
                 userID: $userFirstName.userID,
-                password: newPW,
+                newPassword: newPW,
             }),
         });
 

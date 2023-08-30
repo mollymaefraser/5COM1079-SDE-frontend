@@ -41,6 +41,7 @@
             <span class="block text-sm">{$user.userFirstName} {$user.userLastName}</span>
           </DropdownHeader>
           <DropdownItem href="/change-password">Change Password</DropdownItem>
+          <DropdownItem href="/delete-account">Delete Account</DropdownItem>
         </Dropdown>
       </div>
     {:else if $user.userFirstName !== ""}
@@ -58,6 +59,7 @@
             <span class="block text-sm">{$user.userFirstName} {$user.userLastName}</span>
           </DropdownHeader>
           <DropdownItem href="/change-password">Change Password</DropdownItem>
+          <DropdownItem href="/delete-account">Delete Account</DropdownItem>
         </Dropdown>
       </div>
       {@html "<!--The above are the options for a user who is logged in-->"}

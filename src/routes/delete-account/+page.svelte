@@ -14,24 +14,19 @@
         }
     };
 
-    var email: string;
-    var userID: number;
-    var firstName: string;
-    var lastName: string;
-
     const submit = async () => {
         const res = await fetch(`${PUBLIC_USER_URL}/DeleteAccount`, {
-            method: "POST",
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
                 accept: "text/plain",
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
-                userID: userID,
-                userFirstName: firstName,
-                userLastName: lastName,
-                userEmail: email,
+                userID: $user.userID,
+                userFirstName: $user.userFirstName,
+                userLastName: $user.userLastName,
+                userEmail: $user.userEmail,
                 isUserAdmin: $user.isUserAdmin
             }),
         }).then((response) => {
@@ -56,58 +51,15 @@
             </Toast>
         {/if}
 
-        {#if $user.isUserAdmin == true}
+        {#if $user.userFirstName !== ""}
             <form class="form">
-                <h1 class="delete__title">Sign up</h1>
-
-                <div class="delete_message">
-                    <input
-                        type="text"
-                        class="delete__input"
-                        style="background-color: white"
-                        bind:value={userID}
-                        placeholder="User ID"
-                        required
-                    />
-                    <!--input description for id -->
-                </div>
-
-                <div class="delete_message">
-                    <input
-                        type="text"
-                        class="delete__input"
-                        style="background-color: white"
-                        bind:value={lastName}
-                        placeholder="Last Name"
-                        required
-                    />
-                    <!--input description for name -->
-                </div>
-
-                <div class="delete_message">
-                    <input
-                        type="text"
-                        class="delete__input"
-                        style="background-color: white"
-                        bind:value={lastName}
-                        placeholder="Last Name"
-                        required
-                    />
-                    <!--input description for name -->
-                </div>
-
-                <div class="delete_message">
-                    <input
-                        type="text"
-                        class="delete__input"
-                        style="background-color: white"
-                        bind:value={email}
-                        placeholder="Email"
-                        required
-                    />
-                    <!--input description for email -->
-                </div>
-
+                <h1 class="delete__title">Delete Account</h1>
+                <p>Are you sure you want to delete your account?</p>
+                <strong>This cannot be undone.</strong>
+                <br>
+                <br>
+                <br>
+                <br>
                 <button
                     class="delete__button"
                     type="submit"
@@ -138,6 +90,7 @@
         background-size: cover; /* so the image takes up the entire width of the background */
     }
     .deleteform {
+        text-align: center;
         min-height: 350px;
         max-width: 400px; /* both width and max width should scale the page across different device type(responsive) */
         margin: 1rem; /* one unit of the base font size */
@@ -145,12 +98,9 @@
         box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
         border-radius: 4px;
         background: white;
+        gap: 10px;
     }
 
-    .delete_message {
-        text-align: center;
-        margin-bottom: 1rem;
-    }
 
     .delete__title {
         margin-bottom: 2rem;
@@ -158,25 +108,6 @@
         color: black;
     }
 
-    .delete__input {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0.6rem;
-        border-radius: 4px;
-        outline: none;
-        border: 1px solid lightgrey;
-        background: grey;
-        color: black;
-        transition: background 0.2s, border-color 0.2s; /*transition on the inputfield background colour */
-    }
-
-    .delete__input:focus {
-        /*changes the background colur of the input field in focus to white*/
-        border-color: green;
-        background: white;
-        color: black;
-    }
 
     .delete__button {
         width: 100%;
