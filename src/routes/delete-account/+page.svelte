@@ -18,7 +18,7 @@
         const res = await fetch(`${PUBLIC_USER_URL}/DeleteAccount`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                "Content-Type": "application/json;",
                 accept: "text/plain",
                 "Access-Control-Allow-Origin": "*",
             },
