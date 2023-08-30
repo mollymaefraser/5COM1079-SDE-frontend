@@ -10,6 +10,10 @@
 
     const fireRedirect = async () => {
         if (browser) {
+            $user.isUserAdmin = false
+            $user.userFirstName = ""
+            $user.userLastName = ""
+            $user.userID = 0
             goto("/");
         }
     };

@@ -33,8 +33,6 @@
             }),
         });
 
-        let resp = await res.json();
-
         if (res.status !== 200) {
             errorMessage = "Changing your password failed. Please try again";
             return;
