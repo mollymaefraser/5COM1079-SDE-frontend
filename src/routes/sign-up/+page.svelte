@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { PUBLIC_SIGNUP_URL } from "$env/static/public";
+    import { PUBLIC_USER_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
     import { Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
@@ -27,7 +27,7 @@
             return
         }
 
-        const res = await fetch(`${PUBLIC_SIGNUP_URL}`, {
+        const res = await fetch(`${PUBLIC_USER_URL}/Register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",

@@ -1,15 +1,15 @@
 <script lang="ts">
     import { browser } from "$app/environment";
     import { goto } from "$app/navigation";
-    import { PUBLIC_SYMPTOM_ADD_URL } from "$env/static/public";
-    import isAdminStore from "$lib/types/isAdminStore";
+    import { PUBLIC_SYMPTOM_URL } from "$env/static/public";
+    import user from "$lib/types/user";
     import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
     let symptom: String;
     let errorMessage: String | Error;
 
     const submitSymptom = async () => {
-        const res = await fetch(`${PUBLIC_SYMPTOM_ADD_URL}`, {
+        const res = await fetch(`${PUBLIC_SYMPTOM_URL}/CreateSymptom`, {
             method: "POST",
             body: JSON.stringify(symptom),
         });
@@ -41,7 +41,7 @@
 
 <br />
 
-{#if $isAdminStore == true}
+{#if $user.isUserAdmin == true}
     <div class="text-center">
         <Heading
             tag="h1"

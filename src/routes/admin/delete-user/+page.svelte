@@ -1,26 +1,26 @@
 <script lang="ts">
-    import userFirstName from "$lib/types/user.js";
+    import { browser } from "$app/environment";
     import { goto } from "$app/navigation";
-
+    import user from "$lib/types/user";
     import { PUBLIC_USER_URL } from "$env/static/public";
     import { Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
-    import { browser } from "$app/environment";
-    import user from "$lib/types/user.js";
 
     let errorMessage = "";
 
-    var currentPW: String;
-    var newPW: String;
-
     const fireRedirect = async () => {
         if (browser) {
-            goto("/login");
+            goto("/");
         }
     };
 
+    var email: string;
+    var userID: number;
+    var firstName: string;
+    var lastName: string;
+
     const submit = async () => {
-        const res = await fetch(`${PUBLIC_USER_URL}/ChangePassword`, {
+        const res = await fetch(`${PUBLIC_USER_URL}/Delete`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -28,26 +28,24 @@
                 "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
-                userID: $userFirstName.userID,
-                password: newPW,
+                userID: userID,
+                userFirstName: firstName,
+                userLastName: lastName,
+                userEmail: email,
+                isUserAdmin: $user.isUserAdmin
             }),
+        }).then((response) => {
+            if (response.status !== 200) {
+                return response.text().then((data) => (errorMessage = data));
+            } else {
+                goto("/");
+            }
         });
-
-        let resp = await res.json();
-
-        if (res.status !== 200) {
-            errorMessage = "Changing your password failed. Please try again";
-            return;
-        } else {
-            goto("/");
-        }
     };
 </script>
 
-{@html "<!--I have created an input for the change password form with placeholders for both username and password-->"}
-
 <body>
-    <div class="container">
+    <div class="deleteform">
         {#if errorMessage !== ""}
             <Toast>
                 <svelte:fragment slot="icon">
@@ -58,44 +56,66 @@
             </Toast>
         {/if}
 
-        {#if $user.userFirstName !== ""}
-            <form class="form" id="change-pw">
-                <h1 class="change__title">Change Password</h1>
-                <div class="change__input-message">
+        {#if $user.isUserAdmin == true}
+            <form class="form">
+                <h1 class="delete__title">Sign up</h1>
+
+                <div class="delete_message">
                     <input
-                        type="password"
-                        bind:value={currentPW}
-                        id="current-pw-input"
-                        class="change__input"
+                        type="text"
+                        class="delete__input"
                         style="background-color: white"
-                        placeholder="Current Password"
+                        bind:value={userID}
+                        placeholder="User ID"
+                        required
                     />
-                    <!--input description for username -->
-                    <div class="change__input-error-message" />
+                    <!--input description for id -->
                 </div>
-                <div class="change__input-message">
+
+                <div class="delete_message">
                     <input
-                        type="password"
-                        bind:value={newPW}
-                        id="new-pw-input"
-                        class="change__input"
+                        type="text"
+                        class="delete__input"
                         style="background-color: white"
-                        placeholder="New Password"
+                        bind:value={lastName}
+                        placeholder="Last Name"
+                        required
                     />
-                    <!--input description and placeholder for password -->
-                    <div class="submit__input-error-message" />
+                    <!--input description for name -->
                 </div>
+
+                <div class="delete_message">
+                    <input
+                        type="text"
+                        class="delete__input"
+                        style="background-color: white"
+                        bind:value={lastName}
+                        placeholder="Last Name"
+                        required
+                    />
+                    <!--input description for name -->
+                </div>
+
+                <div class="delete_message">
+                    <input
+                        type="text"
+                        class="delete__input"
+                        style="background-color: white"
+                        bind:value={email}
+                        placeholder="Email"
+                        required
+                    />
+                    <!--input description for email -->
+                </div>
+
                 <button
-                    class="submit__button"
+                    class="delete__button"
                     type="submit"
                     on:click|preventDefault={() => {
                         submit();
-                    }}>Submit</button
+                    }}>Delete User</button
                 >
-                <!--login button with type submit-->
-                <br />
-                <br />
-                <br />
+                <!--delete button with type submit-->
             </form>
         {:else}
             <p hidden>{fireRedirect()}</p>
@@ -103,7 +123,7 @@
     </div>
 </body>
 
-{@html "<!--setting properties for the body, container, -->"}
+{@html "<!--setting propertiews for the body, container, -->"}
 
 <style>
     body {
@@ -117,7 +137,7 @@
         background: url(./Login-page-background.jpg);
         background-size: cover; /* so the image takes up the entire width of the background */
     }
-    .container {
+    .deleteform {
         min-height: 350px;
         max-width: 400px; /* both width and max width should scale the page across different device type(responsive) */
         margin: 1rem; /* one unit of the base font size */
@@ -127,18 +147,18 @@
         background: white;
     }
 
-    .change__title {
+    .delete_message {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .delete__title {
         margin-bottom: 2rem;
         text-align: center;
         color: black;
     }
 
-    .change__input-message {
-        color: black;
-        margin-bottom: 1rem; /* would create some space between the input fields */
-    }
-
-    .change__input {
+    .delete__input {
         display: block;
         width: 100%;
         box-sizing: border-box;
@@ -151,14 +171,14 @@
         transition: background 0.2s, border-color 0.2s; /*transition on the inputfield background colour */
     }
 
-    .change__input:focus {
+    .delete__input:focus {
         /*changes the background colur of the input field in focus to white*/
         border-color: green;
         background: white;
         color: black;
     }
 
-    .submit__button {
+    .delete__button {
         width: 100%;
         padding: 1rem 2rem;
         font-weight: bold;
@@ -171,12 +191,12 @@
         background: green;
     }
 
-    .submit__button:hover {
+    .delete__button:hover {
         background: darkgreen;
     }
 
     /*reduce the size of the button by 2% when clicked*/
-    .submit__button:active {
+    .delete__button:active {
         transform: scale(0.98);
     }
 </style>

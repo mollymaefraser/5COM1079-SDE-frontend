@@ -2,9 +2,8 @@
     import { MultiSelect, Button, Heading, P, Span, Alert, Card, Badge, Toast } from "flowbite-svelte";
     import { Icon } from 'flowbite-svelte-icons';
     import { onMount } from "svelte";
-    import { PUBLIC_SYMPTOM_LOAD_URL, PUBLIC_SYMPTOM_SEND_URL } from "$env/static/public";
+    import { PUBLIC_SYMPTOM_URL, PUBLIC_PREDICTION_URL } from "$env/static/public";
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
-    import type { LayoutData } from "../$types";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import type { PredictionReturn } from "$lib/types/predictionReturn";
@@ -17,7 +16,7 @@
     let errorMessage: string = "";
 
     const submitSymptoms = async () => {
-        const res = await fetch(`${PUBLIC_SYMPTOM_SEND_URL}`, {
+        const res = await fetch(`${PUBLIC_PREDICTION_URL}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -46,7 +45,7 @@
     };
 
     onMount (async () => {
-        const symp = await fetch(`${PUBLIC_SYMPTOM_LOAD_URL}`, {
+        const symp = await fetch(`${PUBLIC_SYMPTOM_URL}/GetAll`, {
             method: 'GET'
         });
 

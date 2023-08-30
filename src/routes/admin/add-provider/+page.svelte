@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from "$app/environment";
     import { goto } from "$app/navigation";
-    import { PUBLIC_LOCATION_ADD_URL } from "$env/static/public";
+    import { PUBLIC_LOCATION_URL } from "$env/static/public";
     import user from "$lib/types/user";
     import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
@@ -15,7 +15,7 @@
     let errorMessage: String | Error;
 
     const submitLocation = async () => {
-        const res = await fetch(`${PUBLIC_LOCATION_ADD_URL}`, {
+        const res = await fetch(`${PUBLIC_LOCATION_URL}/CreateLocation`, {
             method: "POST",
             body: JSON.stringify({
                 longitude: { longitude },

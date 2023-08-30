@@ -5,7 +5,7 @@
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
     import { Icon } from "flowbite-svelte-icons";
-    import { PUBLIC_MARKER_LOAD_URL } from "$env/static/public";
+    import { PUBLIC_LOCATION_URL } from "$env/static/public";
     import { onMount } from "svelte";
     import type { LocationLoad } from "$lib/types/LocationLoad";
     import user from "$lib/types/user";
@@ -23,7 +23,7 @@
     };
 
     onMount(async () => {
-        const mark = await fetch(`${PUBLIC_MARKER_LOAD_URL}`, {
+        const mark = await fetch(`${PUBLIC_LOCATION_URL}/GetAll`, {
             method: "GET",
         });
 

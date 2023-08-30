@@ -1,6 +1,6 @@
 <script lang="ts">
-    import userFirstName from "$lib/types/user.js";
-    import { PUBLIC_LOGIN_URL } from "$env/static/public";
+    import user from "$lib/types/user.js";
+    import { PUBLIC_USER_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
     import { Icon } from "flowbite-svelte-icons";
     import { Toast } from "flowbite-svelte";
@@ -18,7 +18,7 @@
     var email: String;
     var password: String;
     const submit = async () => {
-        const res = await fetch(`${PUBLIC_LOGIN_URL}`, {
+        const res = await fetch(`${PUBLIC_USER_URL}/Login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -37,13 +37,15 @@
             errorMessage = "Login failed. Please try again";
             return;
         } else if (resp.isUserAdmin === true) {
-            $userFirstName.isUserAdmin = true;
-            $userFirstName.userFirstName = resp.userFirstName;
-            $userFirstName.userID = resp.userID;
+            $user.isUserAdmin = true;
+            $user.userFirstName = resp.userFirstName;
+            $user.userLastName = resp.userLastName;
+            $user.userID = resp.userID;
             goto("/");
         } else {
-            $userFirstName.userFirstName = resp.userFirstName;
-            $userFirstName.userID = resp.userID;
+            $user.userFirstName = resp.userFirstName;
+            $user.userLastName = resp.userLastName;
+            $user.userID = resp.userID;
             goto("/");
         }
     };

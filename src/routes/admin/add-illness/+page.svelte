@@ -12,7 +12,7 @@
     } from "flowbite-svelte";
     import type { SelectOptionType } from "flowbite-svelte/dist/types";
     import { onMount } from "svelte";
-    import { PUBLIC_ILLNESS_ADD_URL, PUBLIC_SYMPTOM_LOAD_URL } from "$env/static/public";
+    import { PUBLIC_ILLNESS_URL, PUBLIC_SYMPTOM_URL } from "$env/static/public";
     import { browser } from "$app/environment";
     import { Icon } from "flowbite-svelte-icons";
     import user from "$lib/types/user";
@@ -25,7 +25,7 @@
     let symptomsToChoose: SelectOptionType[] = [];
 
     onMount (async () => {
-        const symp = await fetch(`${PUBLIC_SYMPTOM_LOAD_URL}`, {
+        const symp = await fetch(`${PUBLIC_SYMPTOM_URL}/GetAll`, {
             method: 'GET'
         });
 
@@ -44,7 +44,7 @@
     })
 
     const submitIllness = async () => {
-        const res = await fetch(`${PUBLIC_ILLNESS_ADD_URL}`, {
+        const res = await fetch(`${PUBLIC_ILLNESS_URL}/CreateIllness`, {
             method: "POST",
             body: JSON.stringify({
                 name: { name },

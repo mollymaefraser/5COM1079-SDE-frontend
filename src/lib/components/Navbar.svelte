@@ -6,6 +6,7 @@
   function logout() {
     $user.isUserAdmin = false
     $user.userFirstName = ""
+    $user.userLastName = ""
     $user.userID = 0
   }
 
