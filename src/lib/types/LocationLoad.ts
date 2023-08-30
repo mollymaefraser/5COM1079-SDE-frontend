@@ -1,8 +1,17 @@
 export type LocationLoad = {
+    locationID: number
     longitude: number,
     latitude: number,
-    name: string,
+    nameOfFacility: string,
     address: string,
-    email: string,
-    telephone: number
+    emailAddress: string,
+    telephone: number,
+    offeredServices: Services[]
   }
+
+
+export type Services = {
+  serviceID: number,
+  serviceName: string,
+  serviceDescription: string
+}

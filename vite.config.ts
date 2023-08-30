@@ -3,6 +3,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { searchForWorkspaceRoot } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock';
 import type { UserConfig  } from 'vite';
+import path from 'path';
 
 const config: UserConfig = {
 	test: {
@@ -24,6 +25,12 @@ const config: UserConfig = {
       ],
     },
   },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@tests": path.resolve(__dirname, "./tests")
+    }
+  }
 }
 
 export default config;

@@ -1,6 +1,5 @@
 export type Illness  = {
-    name: string,
-    description: string,
-    advice: string,
-    symptoms: string[]
+    illnessName: string,
+    illnessDescription: string,
+    illnessAdvice: string,
 }

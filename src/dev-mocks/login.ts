@@ -7,7 +7,11 @@ export default [
     statusCode: 200,
     response: () => [
       {
-      isAdmin: false
+      isAdmin: false,
+      firstName: "Joe",
+      lastName: "Bloggs",
+      email: "joe.bloggs@email.com",
+      userID: 2
       }
     ]
   }

@@ -1,54 +1,70 @@
 <script lang="ts">
-    import isLoggedIn from "$lib/types/loggedInStore.js";
-    import isAdmin from "$lib/types/isAdminStore";
-    import { PUBLIC_LOGIN_URL } from "$env/static/public";
+    import user from "$lib/types/user.js";
+    import { PUBLIC_USER_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
-    import ErrorBanner from "$lib/components/ErrorBanner.svelte";
+    import { Icon } from "flowbite-svelte-icons";
+    import { Toast } from "flowbite-svelte";
 
-    var hasFailed: boolean;
+    let errorMessage = "";
+
+    $: console.log(errorMessage)
 
     type LoginResponse = {
-        isAdmin: boolean
-    }
+        userID: number;
+        userFirstName: string;
+        userLastName: string;
+        userEmail: string;
+        isUserAdmin: boolean;
+    };
 
     var email: String;
     var password: String;
     const submit = async () => {
-        const res = await fetch(`${PUBLIC_LOGIN_URL}`, {
+        const res = await fetch(`${PUBLIC_USER_URL}/Login`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                accept: "text/plain",
+            },
             body: JSON.stringify({
-                email: { email },
-                password: { password },
+                email: email,
+                password: password,
             }),
         });
 
-        let resp: LoginResponse[] = await res.json();
-
-        if (resp[0].isAdmin == true) {
-            hasFailed = false;
-            $isAdmin = true;
-            $isLoggedIn = false;
-            goto("/");
-        }
-
-        if (res.status == 200) {
-            hasFailed = false;
-            $isLoggedIn = true;
-            goto("/");
-        } else {
-            hasFailed = true;
+        if (res.status !== 200) {
+            errorMessage = "Login failed. Please try again";
+        } else{
+            let resp: LoginResponse = await res.json();
+            if (resp.isUserAdmin === true) {
+                $user.isUserAdmin = true;
+                $user.userFirstName = resp.userFirstName;
+                $user.userLastName = resp.userLastName;
+                $user.userID = resp.userID;
+                goto("/");
+            } else {
+                $user.userFirstName = resp.userFirstName;
+                $user.userLastName = resp.userLastName;
+                $user.userID = resp.userID;
+                goto("/");
+            }
         }
     };
 </script>
 
 {@html "<!--I have created an input for the login form with placeholders for both username and password-->"}
 
+
 <body>
     <div class="container">
-        {#if hasFailed}
-            <ErrorBanner
-                ErrorMessage="Login has failed. Please try again. Contact support if the issue persists."
-            />
+        {#if errorMessage !== ""}
+            <Toast>
+                <svelte:fragment slot="icon">
+                    <Icon name="close-circle-solid" class="w-5 h-5" />
+                    <span class="sr-only">Error icon</span>
+                </svelte:fragment>
+                <p>{errorMessage}</p>
+            </Toast>
         {/if}
         <form class="form" id="login">
             <h1 class="login__title">Login</h1>
