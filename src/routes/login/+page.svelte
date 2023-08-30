@@ -7,6 +7,8 @@
 
     let errorMessage = "";
 
+    $: console.log(errorMessage)
+
     type LoginResponse = {
         userID: number;
         userFirstName: string;
@@ -21,9 +23,8 @@
         const res = await fetch(`${PUBLIC_USER_URL}/Login`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                "Content-Type": "application/json",
                 accept: "text/plain",
-                "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
                 email: email,
@@ -31,27 +32,28 @@
             }),
         });
 
-        let resp: LoginResponse = await res.json();
-
         if (res.status !== 200) {
             errorMessage = "Login failed. Please try again";
-            return;
-        } else if (resp.isUserAdmin === true) {
-            $user.isUserAdmin = true;
-            $user.userFirstName = resp.userFirstName;
-            $user.userLastName = resp.userLastName;
-            $user.userID = resp.userID;
-            goto("/");
-        } else {
-            $user.userFirstName = resp.userFirstName;
-            $user.userLastName = resp.userLastName;
-            $user.userID = resp.userID;
-            goto("/");
+        } else{
+            let resp: LoginResponse = await res.json();
+            if (resp.isUserAdmin === true) {
+                $user.isUserAdmin = true;
+                $user.userFirstName = resp.userFirstName;
+                $user.userLastName = resp.userLastName;
+                $user.userID = resp.userID;
+                goto("/");
+            } else {
+                $user.userFirstName = resp.userFirstName;
+                $user.userLastName = resp.userLastName;
+                $user.userID = resp.userID;
+                goto("/");
+            }
         }
     };
 </script>
 
 {@html "<!--I have created an input for the login form with placeholders for both username and password-->"}
+
 
 <body>
     <div class="container">
