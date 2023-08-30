@@ -1,6 +1,6 @@
 <script lang="ts">
     import Map from "$lib/components/Map.svelte";
-    import { Card, Heading, Span, Toast } from "flowbite-svelte";
+    import { Badge, Card, Heading, Span, Toast } from "flowbite-svelte";
     import { goto } from "$app/navigation";
     import { browser } from "$app/environment";
     import Footer from "$lib/components/Footer.svelte";
@@ -79,6 +79,9 @@
                     <p>{location.address}</p>
                     <p>{location.emailAddress}</p>
                     <p>{location.telephone}</p>
+                    {#each location.offeredServices as service}
+                        <Badge rounded border color="green">{service.serviceName}</Badge>
+                    {/each}
                 </Card>
             </Col>
         {/each}
