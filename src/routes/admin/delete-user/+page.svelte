@@ -20,7 +20,7 @@
     var lastName: string;
 
     const submit = async () => {
-        const res = await fetch(`${PUBLIC_USER_URL}/Delete`, {
+        const res = await fetch(`${PUBLIC_USER_URL}/DeleteAccount`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",

@@ -20,7 +20,7 @@
     };
 
     const submit = async () => {
-        const res = await fetch(`${PUBLIC_USER_URL}/ChangePassword`, {
+        const res = await fetch(`${PUBLIC_USER_URL}/UpdatePassword`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
