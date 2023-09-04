@@ -5,13 +5,21 @@
     import user from "$lib/types/user";
     import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
-    let symptom: String;
-    let errorMessage: String | Error;
+    let symptom: string;
+    let symptomDescription: string
+    let errorMessage: string | Error;
 
     const submitSymptom = async () => {
         const res = await fetch(`${PUBLIC_SYMPTOM_URL}/CreateSymptom`, {
             method: "POST",
-            body: JSON.stringify(symptom),
+            headers: {
+                "Content-Type": "application/json",
+                accept: "text/plain",
+            },
+            body: JSON.stringify({
+                symptomName: symptom,
+                symptomDescription: symptomDescription
+            }),
         });
 
         if (res.status != 201) {
@@ -58,7 +66,9 @@
     <div class="mb-6">
         <Label for="symptom-input" class="block mb-2">Add a Symptom</Label>
         <Input id="symptom-input" placeholder="Coughing" bind:value={symptom} />
+        <Input id="description-input" placeholder="Constant choking" bind:value={symptomDescription} />
     </div>
+
 
     <div class="submitter">
         <Button color="light" on:click={submitSymptom}>Submit</Button>

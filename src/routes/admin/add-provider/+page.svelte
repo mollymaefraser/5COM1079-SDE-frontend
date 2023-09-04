@@ -6,13 +6,13 @@
     import { Label, Input, Button, Heading, Span, P, Toast } from "flowbite-svelte";
     import { Icon } from "flowbite-svelte-icons";
 
-    let longitude: String;
-    let latitude: String;
-    let name: String;
-    let address: String;
-    let telephone: String;
-    let email: String;
-    let errorMessage: String | Error;
+    let longitude: string;
+    let latitude: string;
+    let name: string;
+    let address: string;
+    let telephone: string;
+    let email: string;
+    let errorMessage: string | Error;
 
     const submitLocation = async () => {
         const res = await fetch(`${PUBLIC_LOCATION_URL}/CreateLocation`, {
@@ -20,11 +20,15 @@
             body: JSON.stringify({
                 longitude: { longitude },
                 latitude: { latitude },
-                name: { name },
+                nameOfFacility: { name },
                 address: { address },
-                email: { email },
+                emailAddress: { email },
                 telephone: { telephone },
             }),
+            headers: {
+                "Content-Type": "application/json",
+                accept: "text/plain",
+            },
         });
 
         if (res.status != 201) {

@@ -17,67 +17,121 @@
     import { Icon } from "flowbite-svelte-icons";
     import user from "$lib/types/user";
 
-    let name: String;
-    let advice: String;
-    let description: String;
-    let errorMessage: String | Error;
+    let name: string;
+    let advice: string;
+    let description: string;
+    let errorMessage: string | Error;
     let symptomsChosen: string[] = [];
     let symptomsToChoose: SelectOptionType[] = [];
+    let symptoms: {
+        symptomID: number;
+        symptomName: string;
+        symptomDescription: string;
+    }[];
 
-    onMount (async () => {
+    onMount(async () => {
         const symp = await fetch(`${PUBLIC_SYMPTOM_URL}/GetAll`, {
-            method: 'GET'
+            method: "GET",
         });
 
-        if (symp.status != 200){
-            errorMessage = "Failed to load symptom options. Please refresh and try again. If the problem persists, contact support."
+        if (symp.status != 200) {
+            errorMessage =
+                "Failed to load symptom options. Please refresh and try again. If the problem persists, contact support.";
         }
 
-        let symptoms = await symp.json();
+        symptoms = await symp.json();
 
         symptoms.forEach((val: any) => {
             symptomsToChoose.push({
-                value: `${val.symptomName}`,
+                value: `${val.symptomID}`,
                 name: `${val.symptomName}`,
             });
         });
-    })
+    });
+
+    const linkSymptoms = async (result: {
+            illnessID: number;
+            illnessName: string;
+            illnessDescription: string;
+            illnessAdvice: string;
+        }) => {
+        let hasFailed = false;
+
+        console.log(result.illnessID)
+
+        for (let i = 0; i < symptomsChosen.length; i++) {
+            console.log(symptomsChosen[i])
+            const res = await fetch(
+                `${PUBLIC_ILLNESS_URL}/LinkIllnessToSymptom`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        illnessID: result.illnessID,
+                        symptomID: symptomsChosen[i],
+                    }),
+                }
+            );
+
+            if (res.status != 201) {
+                hasFailed = true;
+            }
+        }
+
+        if (hasFailed === true) {
+            errorMessage =
+                "Failed to link symptom. Please refresh and try again. If the problem persists, contact support.";
+        }
+    };
 
     const submitIllness = async () => {
         const res = await fetch(`${PUBLIC_ILLNESS_URL}/CreateIllness`, {
             method: "POST",
             body: JSON.stringify({
-                name: { name },
-                description: { description },
-                advice: { advice },
-                symptoms: { symptomsChosen },
+                illnessName: { name },
+                illnessDescription: { description },
+                illnessAdvice: { advice },
             }),
+            headers: {
+                "Content-Type": "application/json",
+                accept: "text/plain",
+            },
         });
+
+        let result: {
+            illnessID: number;
+            illnessName: string;
+            illnessDescription: string;
+            illnessAdvice: string;
+        } = await res.json();
+
+        
 
         if (res.status != 201) {
             errorMessage =
                 "Failed to add Illness. Please refresh and try again. If the problem persists, contact support.";
         }
 
+        linkSymptoms(result)
+
         goto("/");
     };
 
     const fireRedirect = async () => {
-        if(browser){
-            goto("/")
+        if (browser) {
+            goto("/");
         }
     };
 </script>
 
 <div class="error-banner">
     {#if errorMessage}
-    <Toast>
-        <svelte:fragment slot="icon">
-            <Icon name="close-circle-solid" class="w-5 h-5" />
-            <span class="sr-only">Error icon</span>
-        </svelte:fragment>
-        <p>{errorMessage}</p>
-    </Toast>
+        <Toast>
+            <svelte:fragment slot="icon">
+                <Icon name="close-circle-solid" class="w-5 h-5" />
+                <span class="sr-only">Error icon</span>
+            </svelte:fragment>
+            <p>{errorMessage}</p>
+        </Toast>
     {/if}
 </div>
 
@@ -108,7 +162,12 @@
         />
         <Input id="advice-input" placeholder="Advice" bind:value={advice} />
         <div class="symptoms">
-            <MultiSelect dropdownClass="!dark:bg-gray-50 bg-gray-50 hover:text-black" class="!dark:bg-gray-50 bg-gray-50 hover:text-black" items={symptomsToChoose} bind:value={symptomsChosen} />
+            <MultiSelect
+                dropdownClass="!dark:bg-gray-50 bg-gray-50 hover:text-black"
+                class="!dark:bg-gray-50 bg-gray-50 hover:text-black"
+                items={symptomsToChoose}
+                bind:value={symptomsChosen}
+            />
         </div>
     </div>
 
